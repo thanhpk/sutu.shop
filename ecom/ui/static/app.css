@@ -1,0 +1,160 @@
+@import url('./font.css');
+@import url('./css/pe-icon-7-stroke.css');
+body {
+		font-family: 'Myriad Set Pro', sans-serif;
+		font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: 'liga', 'kern';
+    direction: ltr;
+}
+
+.header {
+	/*	background-image: url("../src/assets/background.png");
+	background-repeat: repeat-x repeat-y;*/
+}
+
+.container {
+}
+
+.logo-img {
+	width: 150px; 
+}
+
+.carousel-indicators .active {
+    width: 80px;
+    height: 4px;
+    margin: 0;
+    background-color: rgba(255,255,255,.5)
+     -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+}
+
+.carousel-indicators li {
+	background-color: rgba(255,255,255, 0.2);
+	 -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+	padding-left: 30px;
+    display: inline-block;
+    width: 80px;
+    height: 4px;
+    margin: 0px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.2);
+    border: none;
+    border-radius: 1px;
+}
+
+.left.carousel-control {
+	display: none;
+}
+
+.right.carousel-control {
+	display: none;
+}
+
+.carousel-inner {
+	height: 300px;
+}
+
+.mtbig {
+	margin-top: 60px;
+}
+
+.mbbig {
+	margin-bottom: 60px;
+}
+
+.mtmed {
+		margin-top: 30px;
+}
+
+.mbmed {
+	margin-bottom: 30px;
+}
+
+.navigation-menu {
+	padding-left: 0px;
+	text-align: center;
+}
+.navigation-menu li {
+	display: inline-block;
+	list-style: none;
+	text-transform: uppercase;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-weight: 700;
+}
+
+.navigation-menu a:hover {
+	text-decoration: none;
+	cursor: pointer;
+	color: #444;
+
+}
+
+.navigation-menu a {
+	color: #666;
+
+	text-decoration: none;
+}
+
+@media screen and (min-width: 768px) {
+.carousel-indicators {
+    bottom: 40px;
+}
+}
+
+.three-cols {
+	text-align: center;
+}
+
+.col3 {
+	display: inline-block;
+	width: 32.97777%;
+
+}
+
+/*
+.col3:nth-child(2) {
+margin-left: 5%;
+margin-right: 5%;
+}
+*/
+
+@media (min-width: 1200px) {
+.container {
+    width: 970px;
+}
+}
+
+.mbsm {
+	margin-bottom: 30px;
+}
+
+.mtverybig {
+	margin-top: 100px;
+}
+
+h2 {
+		font-size: 30px;
+    font-family: 'Myriad Set Pro';
+    font-weight: 300;
+}
+
+h3 {
+		font-size: 25px;
+    font-family: 'Myriad Set Pro';
+    font-weight: 300;
+}
+
+.logo-text {
+	font-size: 29px;
+    font-weight: 100;
+}
+
+.feature-icon {
+		font-size: 80px;
+}
