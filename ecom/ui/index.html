@@ -3,11 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Sutu.shop</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link href="bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="static/app.css">
   </head>
   <body>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+			fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+
     <div id="app">
 			<router-view></router-view>
 		</div>
     <!-- built files will be auto injected -->
+		<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=sutu.shop&amp;size=L&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en"></script>
   </body>
 </html>
