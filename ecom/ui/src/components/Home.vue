@@ -103,20 +103,23 @@
 <div class="product-img" style="background-image: url('https://preview.arraythemes.com/checkout-edd/wp-content/uploads/sites/23/edd/2015/02/ipad-600x450.jpg');"></div>
 <h4>Dau goi kho batiste</h4>
 
-
-<FunButton><code>Mua &nbsp;  30 000d  </code></FunButton></div>
+<FunButton><code><i class="icon-bag"></i> 30 000 ₫</code></FunButton></div>
 </div>
 			<div class="col-sm-4 mtmed">
 <div class="product">
 <div class="product-img" style="background-image: url('http://aresivel.wiloke.com/wp-content/uploads/2015/07/5.jpg');"></div>
-<h4>Dau goi kho batiste</h4><code> <i class="dot"></i> 30 k</code></div>
+<h4>Dau goi kho batiste</h4>
+<FunButton><code><i class="icon-bag"></i> 30 000 ₫</code></FunButton>
+</div>
 			</div>
 			<div class="col-sm-4 mtmed">
 
 <div class="product">
 
 <div class="product-img" style="background-image: url('http://aresivel.wiloke.com/wp-content/uploads/2015/07/23.jpg');"></div>
-<h4>Dau goi kho batiste</h4><code> <i class="dot"></i> 30 k</code></div>
+<h4>Dau goi kho batiste</h4>
+<FunButton><code><i class="icon-bag"></i> 30 000 ₫</code></FunButton>
+</div>
 			</div>
 		</div>
 	</div>
@@ -211,6 +214,7 @@ export default {
 	</script>
 
 <style>
+	@import url('~assets/css/feather.css');
 	.product {
 	text-align: center;
 	margin: auto;
@@ -218,29 +222,12 @@ export default {
 
 	}
 
-	.product code .span {
-	position: absolute;
-    display: block;
-    width: 200%;
-    height: 400%;
-    top: -150%;
-    left: -50%;
-    pointer-events: none;
-    z-index: -1;
-    -webkit-transform: translateZ(0);
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    -o-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-transition: all 0.1s ease-out;
-    -moz-transition: all 0.1s ease-out;
-  transition: all 0.1s ease-out;
-
+	.product .icon-bag {
+	position: relative;
+	top: -3px;
+margin-right: 10px;
 	}
-
-
-
-
+	
 	.product code:hover {
 	color: #444;
 	transition: background-color 0.1s ease-out, color 0.2s ease-out;
@@ -250,23 +237,20 @@ export default {
 	
 
 	
-	
 	.product code {
     transition: background-color 0.1s ease-out, color 0.2s ease-out;
-	
-	border-radius: 10px;
+	font-size: 15px;
+	border-radius: 3px;
 	display: inline-block;
 	height: 38px;
 	font-family: 'Myriad Set Pro';
-	font-size: 20px;
 	font-weight: 400;
 	color: #f2f2f2;
 	background-color: #444;
 
-
-    padding-left: 10px;
-    padding-right: 10px;
-  padding-top: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+  padding-top: 10px;
 
 }
 

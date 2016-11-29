@@ -1,6 +1,7 @@
 <template>
-<div style="display:inline-block">
-	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+	<div>
+		
+	<svg  xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
 						<defs>
 							<filter class="filter-goo-2">
 								<feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" x="0"></feGaussianBlur>
@@ -8,8 +9,8 @@
 								<feComposite in="SourceGraphic" in2="goo"></feComposite>
 							</filter>
 						</defs>
-					</svg>
-
+	</svg>
+	
 	<div class="button button--2">
 	<slot></slot>
 	<span class="button__bg" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
@@ -38,6 +39,7 @@ function getRandom(min, max){
 		function initBt2(document) {
 			var bt = document.querySelectorAll('.button--2')[0];
   var filter = document.querySelectorAll('.filter-goo-2 feGaussianBlur')[0];
+	console.log(filter);
   var particleCount = 12;
   var colors = ['#DE8AA0', '#8AAEDE', '#FFB300', '#60C7DA']
 
@@ -86,12 +88,21 @@ function getRandom(min, max){
     outline: none;
 }
 
+	.svg-filters {
+
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+  height: 1px;
+	overflow:hidden;
+
+	}
 
 	.button {
 	cursor: pointer;
 	display: inline-block;
 	position: relative;
-	filter: url('#filter-goo-2');
+	filter: url('/static/svg/filters.svg#filter2');
 	text-decoration: none;
   user-select: none;
 
@@ -108,14 +119,14 @@ function getRandom(min, max){
   .button--2 .left, .button--2 .right {
     position: absolute;
     width: 25px;
-    height: 25px;
-    border-radius: 15px;
-    background: #222;
+    height: 70%;
+    border-radius: 40px;
+    background: #444;
     -webkit-transition: background 0.1s ease-out;
     -moz-transition: background 0.1s ease-out;
     transition: background 0.1s ease-out;
     top: 50%;
-    margin-top: -12px;
+    margin-top: -14px;
     z-index: -2; }
     .button--2 .left.left, .button--2 .right.left {
       left: 0; }
@@ -124,8 +135,8 @@ function getRandom(min, max){
 
 	}
   .button--2 .button__bg {
+border-radius: 3px;
 
-	border-radius: 10px;
     content: "";
     background: #444;
     position: absolute;
@@ -135,12 +146,20 @@ function getRandom(min, max){
     bottom: 0;
     z-index: -1;
     -webkit-transition: background 0.1s ease-out;
-    -moz-transition: background 0.1s ease-out;
-    transition: background 0.1s ease-out; }
+    -moz-transition: background 0.1s ease-out ;
+  transition: background 0.1s ease-out;
+	}
   .button--2:hover {
-    background-color: transparent; }
+  background-color: transparent;
+	}
     .button--2:hover:before, .button--2:hover span {
-      background-color: #ffd32c; }
+  background-color: #ffd32c;
+
+	  -webkit-transition: background 0.1s ease-out;
+    -moz-transition: background 0.1s ease-out ;
+  transition: background 0.1s ease-out;
+
+	}
 
 
 
