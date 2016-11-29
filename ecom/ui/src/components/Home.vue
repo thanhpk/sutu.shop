@@ -90,37 +90,6 @@
 		</div>
 	</div>
 
-
-	<div class="container">
-		<div class="row">
-<div class="col-xs-12">
-<h2>Make up</h2>
-</div>
-			</div>
-		<div class="row">
-			<div class="col-sm-2 mtmed">
-				<img style="height: 100px; width: 100%"  src="http://www.goulko.com/media/thumb/clinique-happy-group2-srgb.jpg?w=300&h=187.5">
-<h5>Dau goi kho batiste</h5>
-			</div>
-			<div class="col-sm-2 mtmed">
-				<img style="height: 200px; width: 100%"  src="static/images/slide3.png">
-			</div>
-
-			<div class="col-sm-2 mtmed">
-				<img style="height: 200px; width: 100%"  src="static/images/slide3.png">
-			</div>
-			<div class="col-sm-2 mtmed">
-				<img style="height: 200px;  width: 100%" src="static/images/slide1.png">
-			</div>
-			<div class="col-sm-2 mtmed">
-				<img style="height: 200px; width: 100%"  src="static/images/slide2.png">
-			</div>
-			<div class="col-sm-2 mtmed">
-				<img style="height: 200px; width: 100%"  src="static/images/slide3.png">
-			</div>
-		</div>
-	</div>
-
 	<div class="container">
 		<div class="row">
 <div class="mtbig text-center">
@@ -129,17 +98,34 @@
 			<div class="col-sm-12"><h2 class="text-center">San pham duoc yeu thich nhat</h2></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3 mtmed">
-				<img style="height: 200px; width: 100%"  src="static/images/slide3.png">
+			<div class="col-sm-4 mtmed">
+<div class="product">
+<div class="product-img" style="background-image: url('https://preview.arraythemes.com/checkout-edd/wp-content/uploads/sites/23/edd/2015/02/ipad-600x450.jpg');"></div>
+<h4>Dau goi kho batiste</h4>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+						<defs>
+							<filter id="filter-goo-2">
+								<feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" x="0"></feGaussianBlur>
+								<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+								<feComposite in="SourceGraphic" in2="goo"></feComposite>
+							</filter>
+						</defs>
+					</svg>
+
+<code id="component-2" class="button button--2" style="filter: url('#filter-goo-2')">Mua &nbsp; <i class="dot"></i> 30 000d  <span class="button__bg" style="transform: matrix(1, 0, 0, 1, 0, 0);"></span></code></div>
+</div>
+			<div class="col-sm-4 mtmed">
+<div class="product">
+<div class="product-img" style="background-image: url('http://aresivel.wiloke.com/wp-content/uploads/2015/07/5.jpg');"></div>
+<h4>Dau goi kho batiste</h4><code> <i class="dot"></i> 30 k</code></div>
 			</div>
-			<div class="col-sm-3 mtmed">
-				<img style="height: 200px;  width: 100%" src="static/images/slide1.png">
-			</div>
-			<div class="col-sm-3 mtmed">
-				<img style="height: 200px; width: 100%"  src="static/images/slide2.png">
-			</div>
-			<div class="col-sm-3 mtmed">
-				<img style="height: 200px; width: 100%"  src="static/images/slide3.png">
+			<div class="col-sm-4 mtmed">
+
+<div class="product">
+
+<div class="product-img" style="background-image: url('http://aresivel.wiloke.com/wp-content/uploads/2015/07/23.jpg');"></div>
+<h4>Dau goi kho batiste</h4><code> <i class="dot"></i> 30 k</code></div>
 			</div>
 		</div>
 	</div>
@@ -224,13 +210,225 @@
 	import PageFooter from './Footer.vue';
 	import $ from 'jquery';
 	console.log($('#app'));
-	console.log(document);
+console.log(document);
+
+function getRandom(min, max){
+  return Math.random() * (max - min) + min;
+}
+
 export default {
-	components: { carousel, PageFooter }	
+	components: { carousel, PageFooter },
+	mounted: function() {
+
+initBt2();
+
+		function initBt2() {
+			var bt = document.querySelectorAll('#component-2')[0];
+			console.log(bt);
+  var filter = document.querySelectorAll('#filter-goo-2 feGaussianBlur')[0];
+  var particleCount = 12;
+  var colors = ['#DE8AA0', '#8AAEDE', '#FFB300', '#60C7DA']
+
+			bt.addEventListener('click', function() {
+				console.log('ss');
+				
+    var particles = [];
+    var tl = new TimelineLite({onUpdate: function() {
+      filter.setAttribute('x', 0);
+    }});
+    
+    tl.to(bt.querySelectorAll('.button__bg'), 0.6, { scaleX: 1.05 });
+    tl.to(bt.querySelectorAll('.button__bg'), 0.9, { scale: 1, ease: Elastic.easeOut.config(1.2, 0.4) }, 0.6);
+
+    for (var i = 0; i < particleCount; i++) {
+      particles.push(document.createElement('span'));
+      bt.appendChild(particles[i]);
+
+      particles[i].classList.add(i % 2 ? 'left' : 'right');
+      
+      var dir = i % 2 ? '-' : '+';
+      var r = i % 2 ? getRandom(-1, 1)*i/2 : getRandom(-1, 1)*i;
+      var size = i < 2 ? 1 : getRandom(0.4, 0.8);
+      var tl = new TimelineLite({ onComplete: function(i) {
+        particles[i].parentNode.removeChild(particles[i]);
+        this.kill();
+      }, onCompleteParams: [i] });
+
+      tl.set(particles[i], { scale: size });
+      tl.to(particles[i], 0.6, { x: dir + 20, scaleX: 3, ease: SlowMo.ease.config(0.1, 0.7, false) });
+      tl.to(particles[i], 0.1, { scale: size, x: dir +'=25' }, '-=0.1');
+      if(i >= 2) tl.set(particles[i], { backgroundColor: colors[Math.round(getRandom(0, 3))] });
+      tl.to(particles[i], 0.6, { x: dir + getRandom(60, 100), y: r*10, scale: 0.1, ease: Power3.easeOut });
+      tl.to(particles[i], 0.2, { opacity: 0, ease: Power3.easeOut }, '-=0.2');
+    }
+  });
+}
+
+
+		}
 }
 	</script>
 
 <style>
+	.product {
+	text-align: center;
+	margin: auto;
+	max-width: 400px;
+
+	}
+
+	.product code .span {
+	position: absolute;
+    display: block;
+    width: 200%;
+    height: 400%;
+    top: -150%;
+    left: -50%;
+    pointer-events: none;
+    z-index: -1;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+
+	}
+
+
+
+
+.button--2 {
+  outline: 90px solid transparent !important;
+  position: relative;
+  z-index: 0;
+  background-color: transparent; }
+  .button--2 .left, .button--2 .right {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 15px;
+    background: #222;
+    -webkit-transition: background 0.1s ease-out;
+    -moz-transition: background 0.1s ease-out;
+    transition: background 0.1s ease-out;
+    top: 50%;
+    margin-top: -12px;
+    z-index: -2; }
+    .button--2 .left.left, .button--2 .right.left {
+      left: 0; }
+    .button--2 .left.right, .button--2 .right.right {
+      right: 0; }
+  .button--2 .button__bg {
+    content: "";
+    background: #222;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    -webkit-transition: background 0.1s ease-out;
+    -moz-transition: background 0.1s ease-out;
+    transition: background 0.1s ease-out; }
+  .button--2:hover {
+    background-color: transparent; }
+    .button--2:hover:before, .button--2:hover span {
+      background-color: #2CD892; }
+
+
+	
+
+	
+	
+	.product code {
+
+	-webkit-filter: url('#filter');
+	filter: url("/#filter");
+
+	
+	font-family: 'Myriad Set Pro';
+	font-size: 20px;
+	font-weight: 400;
+	color: #f2f2f2;
+	background-color: #444;
+
+	    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  padding-top: 4px;
+
+
+
+
+	 -webkit-font-smoothing: antialiased;
+  background-color: #222;
+  border: none;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  letter-spacing: 0.1em;
+  color: white;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  -webkit-transition: background-color 0.1s ease-out;
+  -moz-transition: background-color 0.1s ease-out;
+  transition: background-color 0.1s ease-out; }
+  .button--1:hover, .button--1 .button__bg:hover, .button--2:hover, .button--4:hover, .button--4 .button__bg:hover, .button--5:hover, .button--6:hover, .button--7:hover, .button--8:hover, .button--9:hover, .button--10:hover {
+    background-color: #2CD892;
+    color: #fff; }
+  .button--1:focus, .button--1 .button__bg:focus, .button--2:focus, .button--4:focus, .button--4 .button__bg:focus, .button--5:focus, .button--6:focus, .button--7:focus, .button--8:focus, .button--9:focus, .button--10:focus {
+    outline: none;
+    color: #fff;
+
+	}
+
+
+	.product .dot:before {
+    content: "\002a";
+}
+	.product .dot {
+
+position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+	
+font-size: 9px;
+    vertical-align: super;
+    /* margin-top: 10px; */
+    /* line-height: 1; */
+    top: 5px;
+    left: -3px;
+    color: #f2f2f2;
+
+	}
+	
+	.product h4 {
+	margin-top: 30px;
+	font-wight: 700;
+	text-transform: capitalize;
+	font-size: 19px;
+
+	}
+	
+	.product-img {
+	border-radius: 15px;
+	height: 250px;
+	background-origin: content-box;
+	background-position: center;
+	background-size: cover;
+	}
+	
 	.menu-skincare {
 	background: url('/static/images/skincare.jpg');
 	}
