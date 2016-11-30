@@ -1,0 +1,9 @@
+<svg  xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
+	<defs>
+		<filter id="filter2" class="filter-goo-2">
+			<feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" x="0"></feGaussianBlur>
+			<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+			<feComposite in="SourceGraphic" in2="goo"></feComposite>
+		</filter>
+	</defs>
+</svg>
