@@ -8,7 +8,7 @@ header .logo {
 
 
 header .navmenu ul {
-		text-align: right;
+		text-align: left;
 		list-style: none;
 		padding: 0;
 		margin-left: 100px;
@@ -16,16 +16,15 @@ header .navmenu ul {
 
 header .navmenu ul li {
 		display: inline-block;
-		margin-left: 10px;
-		margin-right: 10px;
-		margin-top: 30px;
-		margin-bottom: 20px;
+		margin-right: 40px;
+		margin-top: 40px;
+		margin-bottom: 30px;
 }
 
 header .navmenu li a {
-		font-size: 13px;
-		font-weight: 400;
-		text-transform: capitalize;
+		font-size: 15px;
+		font-weight: 500;
+		text-transform: uppercase;
 		text-decoration: none;
 		
 
