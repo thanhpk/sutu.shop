@@ -26,9 +26,11 @@ header .navmenu li a {
 		font-weight: 500;
 		text-transform: uppercase;
 		text-decoration: none;
-		
+		color: #444;
 
 }
+
+
 
 header .navmenu li a:hover {
 		text-decoration: none;
