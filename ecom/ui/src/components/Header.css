@@ -1,0 +1,40 @@
+header .logo {
+		top: 50%;
+		transform: translateY(-50%);
+		position: absolute;
+		width: 64px;
+		height: 64px;
+}
+
+
+header .navmenu ul {
+		text-align: right;
+		list-style: none;
+		padding: 0;
+		margin-left: 100px;
+}
+
+header .navmenu ul li {
+		display: inline-block;
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-top: 30px;
+		margin-bottom: 20px;
+}
+
+header .navmenu li a {
+		font-size: 13px;
+		font-weight: 400;
+		text-transform: capitalize;
+		text-decoration: none;
+		
+
+}
+
+header .navmenu li a:hover {
+		text-decoration: none;
+}
+
+header .navmenu li a {
+
+}

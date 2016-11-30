@@ -5,6 +5,9 @@ import BootstrapVue from 'bootstrap-vue';
 import VueRouter from  'vue-router';
 import Home from './components/Home';
 import Hello from './components/Hello';
+
+import Category from './components/Category.vue';
+
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 
@@ -17,6 +20,10 @@ const router = new VueRouter({
 		{
 			path: '/hello',
 			component: Hello
+		},
+		{
+			path: '/makeup',
+			component: Category
 		}
 	]
 });
