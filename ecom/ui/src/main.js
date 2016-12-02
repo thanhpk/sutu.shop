@@ -4,9 +4,9 @@ import BootstrapVue from 'bootstrap-vue';
 
 import VueRouter from  'vue-router';
 import Home from './components/Home';
-import Hello from './components/Hello';
-
+import BuyLayout from './components/BuyLayout.vue';
 import Category from './components/Category.vue';
+import Product from './components/Product.vue';
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
@@ -16,15 +16,16 @@ const router = new VueRouter({
 		{
 			path: '/',
 			component: Home
+		}, {
+			path: '/makeup', component: BuyLayout,
+			children: [{ path: '', component: Category }]
+		}, {
+			path: '/product', component: BuyLayout,
+			children: [{ path: '', component: Product }]
+		}, {
+			path: '/product/:id', component: BuyLayout,
+			children: [{ path: '', component: Product }]
 		},
-		{
-			path: '/hello',
-			component: Hello
-		},
-		{
-			path: '/makeup',
-			component: Category
-		}
 	]
 });
 														 
