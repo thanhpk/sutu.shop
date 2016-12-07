@@ -1,0 +1,5 @@
+version: '2'
+services:
+    ui: {build: {context: /home/thanh/workspace/sutu.shop/ecom/ui}, image: 'thanhpk/sutu.shop:ui', volumes: ['./ui:/srv/sutu.shop.ui'], ports: ['8080:8080']}
+    PROD.ecom: {image: 'thanhpk/sutu.shop:ecom0.1', build: {context: /home/thanh/workspace/sutu.shop/ecom}}
+
