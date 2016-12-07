@@ -1,0 +1,4 @@
+version: '2'
+services:
+    nginx: {build: {context: /home/thanh/workspace/assetup/deps/nginx}, image: 'thanhpk/assetup-nginx:0.1', volumes: ['/var/log:/var/log']}
+
