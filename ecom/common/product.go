@@ -1,17 +1,19 @@
-package common
+package ecom
 
 import (
 	"gopkg.in/mgo.v2/bson"
 	"time"
+	"github.com/thanhpk/sutu.shop/common/auth"
 )
 
 type ProductType struct {
 	_id bson.ObjectId
 	name string
 	description string
-
+	no_view int32
+	no_love int32
 	price int32
-
+	brand_id bson.ObjectId
 }
 
 type Brand struct {
@@ -22,46 +24,63 @@ type Brand struct {
 	cover_image string
 }
 
-type ShippingAddress struct {
-	_id bson.ObjectId
-	phone string
-	address string
-}
-	
-
 type VarianceType struct {
 	_id bson.ObjectId
 	name string
 }
 
 type Variance struct {
-	variance_id string
+	_id bosn.ObjectId
+	variance_id bson.ObjectId
 	value string
 }
 
 type Product struct {
-	_id string
+	_id bson.ObjectId
 
-	type_id string
+	typy_id bson.ObjectId
 
-	price string
+	price int32
+	sale_price int32
 	description string
 	images []string
 	variances []Variance
 }
 
 const ORDER_PLACED = 0
-const ORDER_SHIPPING = 0
+const ORDER_CONFIRMED = 1
+const ORDER_SHIPPING = 2
+const ORDER_SUCCESS = 3
+
+type ShippingAddress auth.Address
 
 type Order struct {
 	_id bson.ObjectId
 	shipping_address ShippingAddress
-	user_ip string
+	user_ip bson.ObjectId
 	user_id bson.ObjectId
 	status int
 	products []Product
 	quanties []int32
+	is_read bool
 	is_paid bool
+
 	create_time time.Time
 	modified_time time.Time
 }
+
+type Sale struct {
+	_id bson.ObjectId
+	start_time time.Time
+	end_time time.Time
+
+	cover_image string
+	quanlification_code string
+}
+
+type Category struct {
+	_id bson.ObjectId
+	name string
+	path string
+}
+	
