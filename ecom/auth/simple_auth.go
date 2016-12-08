@@ -24,7 +24,7 @@ func (auth SimpleAuth) Authenticate(id string, password string) bool {
 	return err == nil
 }
 
-func (auth SimpleAuth) HashPasswordAndSalt(password string) string {
+func (auth SimpleAuth) HashPassword(password string) string {
 	passwordBytes := []byte(password)
 
 	hashedPassword, err := bcrypt.GenerateFromPassword(passwordBytes, bcrypt.DefaultCost)
