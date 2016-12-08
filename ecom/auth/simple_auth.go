@@ -6,7 +6,7 @@ import (
 	ca "github.com/thanhpk/sutu.shop/ecom/common/auth"
 )
 
-var ACTIONS []string = []string{"view_product","edit_product","delete_product","view_order"}
+var ACTIONS = []string{"add_order"}
 
 type SimpleAuth struct {
 	scope string

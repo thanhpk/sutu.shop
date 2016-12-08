@@ -9,7 +9,7 @@ type MockUserDb struct {
 
 func (u MockUserDb) MatchById(id string) ca.User {
 	if id == "1" {
-		return ca.User{Id: "1", HashedPassword: "$2a$10$gBoSGsE.4ZV/sL5cn8NVFuhou1/DXZWHeYqbCOqAQ/2umnHGbXw1C"}
+		return ca.User{Id: "1", HashedPassword: "$2a$10$gBoSGsE.4ZV/sL5cn8NVFuhou1/DXZWHeYqbCOqAQ/2umnHGbXw1C", IsAdmin: true}
 	}
 
 	if id == "2" {
@@ -53,5 +53,18 @@ func TestHashPassword(t *testing.T) {
 
 	if result {
 		t.Error("Expected false, got ", result)
+	}
+}
+
+func TestCanAccess(t *testing.T) {
+	auth := NewSimpleAuth("123", MockUserDb{})
+	retTrue := auth.CanAccess("1", "delete_user")
+	if !retTrue {
+		t.Error("Expected true, got ", retTrue)
+	}
+
+	retFalse := auth.CanAccess("2", "delete_user")
+	if retFalse {
+		t.Error("Expected false, got ", retFalse)
 	}
 }
