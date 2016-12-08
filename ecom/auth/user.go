@@ -1,7 +1,7 @@
 package auth
 
 import (
-	bson "gopkg.in/mgo.v2/bson"
+//	bson "gopkg.in/mgo.v2/bson"
 	mgo "gopkg.in/mgo.v2"
 	commom_auth "github.com/thanhpk/sutu.shop/ecom/common/auth"
 )
@@ -19,6 +19,6 @@ func NewUserMgr(scope string) *UserMgr {
 
 }
 
-func (u UserMgr) MatchById(id bson.MongoId)  commom_auth.User {
-
+func (u *UserMgr) MatchById(id string)  commom_auth.User {
+	panic ("not implemented")
 }
