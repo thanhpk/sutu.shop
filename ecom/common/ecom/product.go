@@ -7,7 +7,7 @@ import (
 )
 
 type ProductType struct {
-	_id bson.ObjectId
+	id string
 	name string
 	description string
 	no_view int32
@@ -17,7 +17,7 @@ type ProductType struct {
 }
 
 type Brand struct {
-	_id bson.ObjectId
+	id string
 	name string
 	description string
 	logo_image string
@@ -25,20 +25,20 @@ type Brand struct {
 }
 
 type VarianceType struct {
-	_id bson.ObjectId
+	id string
 	name string
 }
 
 type Variance struct {
-	_id bosn.ObjectId
+	id string
 	variance_id bson.ObjectId
 	value string
 }
 
 type Product struct {
-	_id bson.ObjectId
+	id string
 
-	typy_id bson.ObjectId
+	typy_id string
 
 	price int32
 	sale_price int32
@@ -55,10 +55,10 @@ const ORDER_SUCCESS = 3
 type ShippingAddress auth.Address
 
 type Order struct {
-	_id bson.ObjectId
+	id string
 	shipping_address ShippingAddress
-	user_ip bson.ObjectId
-	user_id bson.ObjectId
+	user_ip string
+	user_id string
 	status int
 	products []Product
 	quanties []int32
@@ -70,7 +70,7 @@ type Order struct {
 }
 
 type Sale struct {
-	_id bson.ObjectId
+	id string
 	start_time time.Time
 	end_time time.Time
 
@@ -79,7 +79,8 @@ type Sale struct {
 }
 
 type Category struct {
-	_id bson.ObjectId
+	id string
+	
 	name string
 	path string
 }

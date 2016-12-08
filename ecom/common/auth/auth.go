@@ -1,4 +1,3 @@
-
 package auth
 
 import (
@@ -6,19 +5,20 @@ import (
 )
 
 type Address struct {
-	_id bson.ObjectId
+	id string
 	phone string
 	address string
 }
 
 type User struct {
-	id bson.ObjectId
+	id string
 	name string
 	email string
 	phone string
 	hashed_password string
 	point int32
-	isAdmin bool
+	is_admin bool
+	username string
 
 	addresses []Address
 }
@@ -29,7 +29,8 @@ type Auth interface {
 }
 
 type UserDb interface {
-	MatchById(id bson.ObjectId) User
+	MatchById(id string) User
+	MatchByUsername(username string) User
 	MatchByPhone(phone string) User
 
 	Create(user User) string // return user id
