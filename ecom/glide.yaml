@@ -1,6 +1,0 @@
-package: .
-import:
-- package: github.com/kataras/iris
-  version: v4
-  subpackages:
-  - iris
