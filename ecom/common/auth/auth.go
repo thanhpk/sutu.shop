@@ -1,31 +1,27 @@
 package auth
 
-import (
-	"gopkg.in/mgo.v2/bson"
-)
-
 type Address struct {
-	id string
-	phone string
-	address string
+	Id string
+	Phone string
+	Address string
 }
 
 type User struct {
-	id string
-	name string
-	email string
-	phone string
-	hashed_password string
-	point int32
-	is_admin bool
-	username string
+	Id string
+	Name string
+	Email string
+	Phone string
+	HashedPassword string
+	Point int32
+	IsAdmin bool
+	Username string
 
-	addresses []Address
+	Addresses []Address
 }
 
 type Auth interface {
-	Authenticate()
-	CanAccess(user_id bson.ObjectId, action string)
+	Authenticate(id string, password string) bool
+	CanAccess(user_id string, action string) bool
 }
 
 type UserDb interface {
@@ -35,6 +31,6 @@ type UserDb interface {
 
 	Create(user User) string // return user id
 	Update(user User) // id never change
-	Delete(id bson.ObjectId)
+	Delete(id string)
 }
 

@@ -1,50 +1,49 @@
 package ecom
 
 import (
-	"gopkg.in/mgo.v2/bson"
 	"time"
-	"github.com/thanhpk/sutu.shop/common/auth"
+	"github.com/thanhpk/sutu.shop/ecom/common/auth"
 )
 
 type ProductType struct {
-	id string
-	name string
-	description string
-	no_view int32
-	no_love int32
-	price int32
-	brand_id bson.ObjectId
+	Id string
+	Name string
+	Description string
+	NumverOfView int32
+	NumberOfLove int32
+	Price int32
+	BrandId string
 }
 
 type Brand struct {
-	id string
-	name string
-	description string
-	logo_image string
-	cover_image string
+	Id string
+	Name string
+	Description string
+	LogoImage string
+	CoverImage string
 }
 
 type VarianceType struct {
-	id string
-	name string
+	Id string
+	Name string
 }
 
 type Variance struct {
-	id string
-	variance_id bson.ObjectId
-	value string
+	Id string
+	VarianceId string
+	Value string
 }
 
 type Product struct {
-	id string
+	Id string
 
-	typy_id string
+	TypeId string
 
-	price int32
-	sale_price int32
-	description string
-	images []string
-	variances []Variance
+	Price int32
+	SalePrice int32
+	Description string
+	Images []string
+	Variances []Variance
 }
 
 const ORDER_PLACED = 0
@@ -55,33 +54,33 @@ const ORDER_SUCCESS = 3
 type ShippingAddress auth.Address
 
 type Order struct {
-	id string
-	shipping_address ShippingAddress
-	user_ip string
-	user_id string
-	status int
-	products []Product
-	quanties []int32
-	is_read bool
-	is_paid bool
+	Id string
+	ShippingAddress ShippingAddress
+	UserIp string
+	UserIxd string
+	Status int
+	Products []Product
+	Quanties []int32
+	IsRead bool
+	IsPaid bool
 
-	create_time time.Time
-	modified_time time.Time
+	CreateTime time.Time
+	LastModifiedTime time.Time
 }
 
 type Sale struct {
-	id string
-	start_time time.Time
-	end_time time.Time
+	Id string
+	StartTime time.Time
+	EndTime time.Time
 
-	cover_image string
-	quanlification_code string
+	CoverImage string
+	QuanlificationCode string
 }
 
 type Category struct {
-	id string
+	Id string
 	
-	name string
-	path string
+	Name string
+	Path string
 }
 	
