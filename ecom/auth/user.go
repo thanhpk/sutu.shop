@@ -1,22 +1,24 @@
 package auth
 
 import (
-//	bson "gopkg.in/mgo.v2/bson"
-	mgo "gopkg.in/mgo.v2"
+	imgo "github.com/thanhpk/sutu.shop/ecom/common/db"
 	commom_auth "github.com/thanhpk/sutu.shop/ecom/common/auth"
 )
 
 type UserMgr struct {
 	scope string
-	session mgo.Session
+	session imgo.Session
 	database string
 }
 
-func NewUserMgr(scope string) *UserMgr {
-	userMgr := &UserMgr{}
+func NewUserMgr(scope string, session imgo.Session) *UserMgr {
+	userMgr := &UserMgr{
+		scope: scope,
+		session: session,
+		database: scope + "_user"	}
+	
 
 	return userMgr
-
 }
 
 func (u *UserMgr) MatchById(id string)  commom_auth.User {
