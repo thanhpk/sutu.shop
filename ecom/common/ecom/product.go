@@ -13,6 +13,7 @@ type ProductType struct {
 	NumberOfLove int32
 	Price int32
 	BrandId string
+	Category Category
 }
 
 type Brand struct {
@@ -38,7 +39,7 @@ type Product struct {
 	Id string
 
 	TypeId string
-
+	Name string
 	Price int32
 	SalePrice int32
 	Description string
@@ -53,17 +54,20 @@ const ORDER_SUCCESS = 3
 
 type ShippingAddress auth.Address
 
+type Item struct {
+	Product Product
+	Quantity int32
+}
+
 type Order struct {
 	Id string
 	ShippingAddress ShippingAddress
 	UserIp string
-	UserIxd string
+	UserId string
 	Status int
-	Products []Product
-	Quanties []int32
+	Items []Item
 	IsRead bool
 	IsPaid bool
-
 	CreateTime time.Time
 	LastModifiedTime time.Time
 }
@@ -82,5 +86,6 @@ type Category struct {
 	
 	Name string
 	Path string
+	Parent *Category
 }
 	
