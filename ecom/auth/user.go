@@ -41,4 +41,14 @@ func (u *UserMgr) MatchByUserName(username string) *CA.User {
 	return &user
 }
 
+func (u *UserMgr) FindByPhone(phone string) []CA.User {
+	c := u.database.C(u.collectionName)
+	var users []CA.User
+
+	err := c.Find(bson.M{"phone": phone}).All(&users)
+	if err != nil {
+		panic (err)
+	}
+	return users
+}
 
