@@ -25,12 +25,12 @@ type Auth interface {
 }
 
 type UserDb interface {
-	MatchById(id string) User
-	MatchByUsername(username string) User
-	MatchByPhone(phone string) User
+	MatchById(id string) *User
+	MatchByUsername(username string) *User
+	FindByPhone(phone string) []*User
 
-	Create(user User) string // return user id
-	Update(user User) // id never change
+	Create(user *User) string // return user id
+	Update(user *User) // id never change
 	Delete(id string)
 }
 

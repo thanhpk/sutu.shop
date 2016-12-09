@@ -1,6 +1,7 @@
 package auth
 
 import (
+	bson "gopkg.in/mgo.v2/bson"
 	mgo "gopkg.in/mgo.v2"
 	CA "github.com/thanhpk/sutu.shop/ecom/common/auth"
 )
@@ -20,7 +21,7 @@ func NewUserMgr(scope string, database mgo.Database) *UserMgr {
 	return userMgr
 }
 
-func (u UserMgr) MatchById(id string) *CA.User {
+func (u *UserMgr) MatchById(id string) *CA.User {
 	c := u.database.C(u.collectionName)
 	user := CA.User{}
 	err := c.FindId(id).One(&user)
@@ -29,3 +30,15 @@ func (u UserMgr) MatchById(id string) *CA.User {
 	}
 	return &user
 }
+
+func (u *UserMgr) MatchByUserName(username string) *CA.User {
+	c := u.database.C(u.collectionName)
+	user := CA.User{}
+	err := c.Find(bson.M{"username": username}).One(&user)
+	if err != nil {
+		return nil
+	}
+	return &user
+}
+
+
