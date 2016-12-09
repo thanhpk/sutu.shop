@@ -16,7 +16,8 @@ func NewUserMgr(scope string, database mgo.Database) *UserMgr {
 	userMgr := &UserMgr{
 		scope: scope,
 		database: database,
-		collectionName: scope + "_user"	}
+		collectionName: scope + "_user",
+	}
 	
 	return userMgr
 }
@@ -52,3 +53,25 @@ func (u *UserMgr) FindByPhone(phone string) []CA.User {
 	return users
 }
 
+func (u *UserMgr) Create(user *CA.User) string {
+	_id := bson.NewObjectId()
+	user.Id = string(_id)
+	err := u.database.C(u.collectionName).Insert(user)
+	if err != nil {
+		panic (err)
+	}
+	return string(_id)
+}
+
+func (u *UserMgr) Update(user *CA.User) {
+	data, err := bson.Marshal(user)
+	if err != nil {
+		panic(err)
+	}
+
+	err = u.database.C(u.collectionName).UpdateId(user.Id, bson.M{"$set": data})
+
+	if err != nil {
+		panic(err)
+	}
+}

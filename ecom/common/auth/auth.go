@@ -31,6 +31,5 @@ type UserDb interface {
 
 	Create(user *User) string // return user id
 	Update(user *User) // id never change
-	Delete(id string)
 }
 
