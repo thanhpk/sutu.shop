@@ -7,20 +7,19 @@ import (
 
 type UserMgr struct {
 	scope string
-	session imgo.Session
-	database string
+	database imgo.Database
+	collection string
 }
 
-func NewUserMgr(scope string, session imgo.Session) *UserMgr {
+func NewUserMgr(scope string, database imgo.Database) *UserMgr {
 	userMgr := &UserMgr{
 		scope: scope,
-		session: session,
-		database: scope + "_user"	}
+		database: database,
+		collection: scope + "_user"	}
 	
-
 	return userMgr
 }
 
 func (u *UserMgr) MatchById(id string)  commom_auth.User {
-	panic ("not implemented")
+	
 }

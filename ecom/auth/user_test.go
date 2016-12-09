@@ -11,11 +11,28 @@ type MongoSessionMock struct {
 	mgo.Session
 }
 
-func (s MongoSessionMock) DB(name string) *mgo.Database {
-	return imgo.Database{}
+type DatabaseMock struct {
+}
+
+type CollectionMock struct {}
+
+func (CollectionMock) EnsureIndexKey(key ...string) error {
+	return nil
+}
+
+func (DatabaseMock) C(name string) *imgo.Collection {
+	c := imgo.Collection(CollectionMock{})
+	return &c
+}
+
+func (s *MongoSessionMock) DB(name string) *imgo.Database {
+	d := imgo.Database(DatabaseMock{})
+	return &d
 }
 
 func TestMatchById(t *testing.T) {
-	usermgr := NewUserMgr("111", MongoSessionMock{})
+	usermgr := NewUserMgr("111", DatabaseMock{})
+	
 	fmt.Println(usermgr)
 }
+
