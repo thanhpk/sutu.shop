@@ -5,12 +5,12 @@ import (
 )
 
 type ProductType struct {
-	Id string
+	Id string `json:"id" bson:"_id,omitempty"`
 	Name string
 	Description string
-	NumverOfView int32
-	NumberOfLove int32
-	Price int32
+	NumverOfView int
+	NumberOfLove int
+	Price int
 	BrandId string
 	CategoryId string
 }
@@ -26,13 +26,13 @@ type ProductTypeMgt struct {
 type IProductTypeRepository interface {
 	Create(*ProductType) string
 	Count(search string) string
-	List(keyword string, n int32, p int32) []ProductType
+	List(keyword string, n int, p int) []ProductType
 	Update(*ProductType) string
 	Read(id string) *ProductType
 }
 
 type Brand struct {
-	Id string
+	Id string `json:"id" bson:"_id,omitempty"`
 	Name string
 	Description string
 	LogoImage string
@@ -42,37 +42,36 @@ type Brand struct {
 type IBrandRepository interface {
 	Create(*Brand) string
 	Count(search string) string
-	List(keyword string, n int32, p int32) []Brand
+	List(keyword string, n int, p int) []Brand
 	Update(*Brand) string
 	Read(id string) *Brand
 }
 
 type VarianceType struct {
-	Id string
+	Id string `json:"id" bson:"_id,omitempty"`
 	Name string
 }
 
 type IVarianceTypeRepository interface {
 	Create(*VarianceType) string
 	Count(search string) string
-	List(keyword string, n int32, p int32) []VarianceType
+	List(keyword string, n int, p int) []VarianceType
 	Update(*VarianceType) string
 	Read(id string) *VarianceType
 }
 
 type Variance struct {
-	Id string
 	VarianceTypeId string
 	Value string
 }
 
 type Product struct {
-	Id string
-	Quantity int32
+	Id string `json:"id" bson:"_id,omitempty"`
+	Quantity int
 	TypeId string
 	Name string
-	Price int32
-	SalePrice int32
+	Price int
+	SalePrice int
 	Description string
 	Images []string
 	Variances []Variance
@@ -81,7 +80,7 @@ type Product struct {
 type IProductRepository interface {
 	Create(*Product) string
 	Count(search string) string
-	List(keyword string, n int32, p int32) []Product
+	List(keyword string, n int, p int) []Product
 	Update(*Product) string
 	Read(id string) *Product
 }
@@ -93,11 +92,11 @@ const ORDER_SUCCESS = 3
 
 type Item struct {
 	ProductId string
-	Quantity int32
+	Quantity int
 }
 
 type Order struct {
-	Id string
+	Id string `json:"id" bson:"_id,omitempty"`
 	Code string
 	ShippingAddressId string
 	UserIp string
@@ -113,14 +112,14 @@ type Order struct {
 type IOrderRepository interface {
 	Create(*Order) string
 	Count(keyword string) string
-	List(keyword string, n int32, p int32) []Order
+	List(keyword string, n int, p int) []Order
 	Update(*Order) string
 	Read(id string) *Order
 	Match(code string) *Order
 }
 
 type Sale struct {
-	Id string
+	Id string `json:"id" bson:"_id,omitempty"`
 	Name string
 	Code string
 	StartTime time.Time
@@ -130,16 +129,16 @@ type Sale struct {
 }
 
 type ISaleRepository interface {
-	Cerate(*Sale) string
+	Create(*Sale) string
 	Count(keyword string) string
-	List(keyword string, n int32, p int32) []Sale
+	List(keyword string, n int, p int) []Sale
 	Update(*Sale) string
 	Read(id string) *Sale
 	Match(code string) *Sale
 }
 
 type Category struct {
-	Id string
+	Id string `json:"id" bson:"_id,omitempty"`
 	
 	Name string
 	Path string
@@ -147,34 +146,33 @@ type Category struct {
 }
 
 type ICategoryRepository interface {
-	Cerate(*Category) string
+	Create(*Category) string
 	Count(keyword string) string
-	List(keyword string, n int32, p int32) []Category
+	List(keyword string, n int, p int) []Category
 	Update(*Category) string
 	Read(id string) *Category
 	Match(code string) *Category
 }
 
 type Address struct {
-	Id string
 	Phone string
 	Address string
 }
 
 type IAddressRepository interface {
-	Cerate(*Address) string
+	Create(*Address) string
 	Count(keyword string) string
-	List(keyword string, n int32, p int32) []Address
+	List(keyword string, n int, p int) []Address
 	Update(*Address) string
 	Read(id string) *Address
 	Match(code string) *Address
 }
 
 type Customer struct {
-	Id string
+	Id string `json:"id" bson:"_id,omitempty"`
 	Name string
 	HashedPassword string
-	Point int32
+	Point int
 	IsAdmin bool
 
 	FbUserId string
@@ -195,10 +193,9 @@ type Auth interface {
 }
 
 type ICustomerRepository interface {
-
 	Create(*Customer) string
-	Count(keyword string) int32
-	List(keyword string, n int32, p int32) []Customer
+	Count(keyword string) int
+	List(keyword string, n int, skip int) []Customer
 	Update(*Customer) error
 	Read(id string) *Customer
 	MatchByPhone(string) *Customer
@@ -212,4 +209,6 @@ type ICustomerMgt interface {
 	CreateFromFacebook(accesstoken string) string //panic
 	Create(password string, cus *Customer) string //panic
 	MatchByPhone(string) *Customer
+	List(keyword string, n int, skip int) []Customer
+	Count(keyword string) int
 }
