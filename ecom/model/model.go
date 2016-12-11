@@ -2,7 +2,6 @@ package model
 
 import (
 	"time"
-	"github.com/thanhpk/sutu.shop/ecom/common/auth"
 )
 
 type ProductType struct {
@@ -13,7 +12,15 @@ type ProductType struct {
 	NumberOfLove int32
 	Price int32
 	BrandId string
-	Category Category
+	CategoryId string
+}
+
+type IProductTypeMgt interface {
+	
+}
+
+type ProductTypeMgt struct {
+	
 }
 
 type IProductTypeRepository interface {
@@ -55,12 +62,13 @@ type IVarianceTypeRepository interface {
 
 type Variance struct {
 	Id string
-	VarianceId string
+	VarianceTypeId string
 	Value string
 }
 
 type Product struct {
 	Id string
+	Quantity int32
 	TypeId string
 	Name string
 	Price int32
@@ -84,14 +92,14 @@ const ORDER_SHIPPING = 2
 const ORDER_SUCCESS = 3
 
 type Item struct {
-	Product Product
+	ProductId string
 	Quantity int32
 }
 
 type Order struct {
 	Id string
 	Code string
-	ShippingAddress Address
+	ShippingAddressId string
 	UserIp string
 	UserId string
 	Status int
@@ -190,5 +198,3 @@ type ICustomerRepository interface {
 	
 	MatchByUsername(string) *Customer	
 }
-
-
