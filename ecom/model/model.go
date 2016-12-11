@@ -173,15 +173,21 @@ type IAddressRepository interface {
 type Customer struct {
 	Id string
 	Name string
-	Email string
-	Phone string
 	HashedPassword string
 	Point int32
 	IsAdmin bool
-	Username string
 
+	FBUserId string
+	FBAccessToken string
+	
+	Email string
+	Phone string
 	Addresses []Address
+
+	CreateTime time.Time
+	LastLogin time.Time
 }
+
 
 type Auth interface {
 	Authenticate(id string, password string) bool
@@ -197,4 +203,12 @@ type ICustomerRepository interface {
 	Read(id string) *Customer
 	
 	MatchByUsername(string) *Customer	
+}
+
+type ICustomerMgt interface {
+	AuthByPhone(phone string, password string) (string, error)
+	Read(id string) *Customer
+	AuthByFacebook(accesstoken string) (string, error)
+	CreateFromFacebook(accesstoken string) string
+	Create(*Customer) string
 }
