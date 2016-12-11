@@ -177,8 +177,8 @@ type Customer struct {
 	Point int32
 	IsAdmin bool
 
-	FBUserId string
-	FBAccessToken string
+	FbUserId string
+	FbAccessToken string
 	
 	Email string
 	Phone string
@@ -199,16 +199,17 @@ type ICustomerRepository interface {
 	Create(*Customer) string
 	Count(keyword string) int32
 	List(keyword string, n int32, p int32) []Customer
-	Update(*Customer) string
+	Update(*Customer) error
 	Read(id string) *Customer
-	
-	MatchByUsername(string) *Customer	
+	MatchByPhone(string) *Customer
+	MatchByFbUserId(string) *Customer
 }
 
 type ICustomerMgt interface {
-	AuthByPhone(phone string, password string) (string, error)
-	Read(id string) *Customer
-	AuthByFacebook(accesstoken string) (string, error)
-	CreateFromFacebook(accesstoken string) string
-	Create(*Customer) string
+	AuthByPhone(phone string, password string) (*Customer, error)
+	Read(id string) (*Customer, error)
+	AuthByFacebook(accesstoken string) (*Customer, error)
+	CreateFromFacebook(accesstoken string) string //panic
+	Create(password string, cus *Customer) string //panic
+	MatchByPhone(string) *Customer
 }
