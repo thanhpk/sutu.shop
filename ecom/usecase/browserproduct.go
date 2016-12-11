@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type Sale struct {
+type SaleBP struct {
 	Id string
 	Name string
 	Code string
@@ -14,17 +14,17 @@ type Sale struct {
 	QuanlificationCode string
 }
 
-type VarianceType struct {
+type VarianceTypeBP struct {
 	Id string
 	Name string
 }
 
-type Variance struct {
-	VarianceType VarianceType
+type VarianceBP struct {
+	VarianceType VarianceTypeBP
 	Value string
 }
 
-type ProductType struct {
+type ProductTypeBP struct {
 	Id string
 	Name string
 	Description string
@@ -32,38 +32,39 @@ type ProductType struct {
 	NumberOfLove int32
 	Price int32
 	BrandName string
+	CategoryId string
 }
 
-type Product struct {
+type ProductBP struct {
 	Id string
 	IsInStock bool
-	Type ProductType
+	Type ProductTypeBP
 	Name string
 	Price int32
 	SalePrice int32
 	Images []string
-	Variances []Variance
+	Variances []VarianceBP
 }
 
-type ProductDetails struct {
-	Product
+type ProductDetailsBP struct {
+	ProductBP
 	Description string
 }
 
-type Category struct {
+type CategoryBP struct {
 	Id string
 	
 	Name string
 	Path string
-	Parent *Category
+	Parent *CategoryBP
 }
 
 type IBrowserProduct interface {
-	ListRecentSale() []Sale
-	ListMostLovedProducts() []Product
-	ListNewArriveProducts() []Product
+	ListRecentSale() []SaleBP
+	ListMostLovedProducts() []ProductBP
+	ListNewArriveProducts() []ProductBP
 
-	GetCategoryTree() []Category
-	ListProductByCategory() []Product
-	GetProductDetails(productid string) *ProductDetails
+	GetCategoryTree() []CategoryBP
+	ListProductByCategory() []ProductBP
+	GetProductDetails(productid string) *ProductDetailsBP
 }

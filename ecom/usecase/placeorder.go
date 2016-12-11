@@ -1,39 +1,37 @@
 package usecase
 
-import (
-	model "github.com/thanhpk/sutu.shop/ecom/model"
-)
 
-type Address struct {
+type AddressPO struct {
 	Id string
 	Phone string
 	Address string
 }
 
-type Item struct {
+type ItemPO struct {
 	ProductId string
 	Quantity int32
 }
 
-type ItemDetails struct {
-	Item
+type ItemDetailsPO struct {
+	ItemPO
 	TotalPrice int32
 }
 
-type Order struct {
+type OrderPO struct {
 	ShippingAddressId string 
 	UserId string
-	Items []Item
+	Items []ItemPO
 }
 
 type OrderDetails struct {
 	Order
+	Items []ItemDetailsPO
 	TotalPrice int32
 }
 
 type IPlaceOrder interface {
-	GetOrderDetails(userid string, order Order) OrderDetails
+	GetOrderDetails(userid string, order Order) OrderDetailsPO
 	SaveAddress(userid string, address Address) string
-	GetAddresses(useid string) []Address
+	GetAddresses(useid string) []AddressPO
 	PlaceOrder(userid string, ip string, order Order)
 }
