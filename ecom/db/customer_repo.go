@@ -3,6 +3,7 @@ package model
 import (
 	bson "gopkg.in/mgo.v2/bson"
 	mgo "gopkg.in/mgo.v2"
+	"github.com/thanhpk/sutu.shop/ecom/model"
 )
 
 type list []interface{}
