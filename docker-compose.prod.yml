@@ -1,0 +1,8 @@
+version: 2
+
+
+services:
+  snginx: # secure nginx: nginx + certbot
+   image: thanhpk/sutu.shop.snginx:v0.1
+   links:
+     - ECOM.nginx: ecom

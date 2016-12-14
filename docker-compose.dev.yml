@@ -1,0 +1,9 @@
+verison: '2'
+
+includes:
+  PROD: "docker-compose.prod.yml"
+
+services:
+  PROD.snginx:
+    build:
+      context: snginx
