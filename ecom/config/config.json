@@ -1,5 +1,9 @@
 {
 	"endpoint" : {
 		"port": "8080"
+	},
+	"database": {
+		"hostname": "172.25.0.2",
+		"database": "sutushop"
 	}
 }
