@@ -192,16 +192,6 @@ type Auth interface {
 	CanAccess(user_id string, action string) bool
 }
 
-type ICustomerRepository interface {
-	Create(*Customer) string
-	Count(keyword string) int
-	List(keyword string, n int, skip int) []Customer
-	Update(*Customer) error
-	Read(id string) *Customer
-	MatchByPhone(string) *Customer
-	MatchByFbUserId(string) *Customer
-}
-
 type ICustomerMgt interface {
 	AuthByPhone(phone string, password string) (*Customer, error)
 	Read(id string) (*Customer, error)

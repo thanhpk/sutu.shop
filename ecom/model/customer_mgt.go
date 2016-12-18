@@ -6,6 +6,16 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type ICustomerRepository interface {
+	Create(*Customer) string
+	Count(keyword string) int
+	List(keyword string, n int, skip int) []Customer
+	Update(*Customer) error
+	Read(id string) *Customer
+	MatchByPhone(string) *Customer
+	MatchByFbUserId(string) *Customer
+}
+
 type FbAppInfo struct {
 	Id string
 	Name string
@@ -25,8 +35,8 @@ type IFacebookGraphApi interface {
 
 type CustomerMgt struct {
 	FbAppId string
-	repo ICustomerRepository
-	fb IFacebookGraphApi
+	Repo ICustomerRepository
+	Fb IFacebookGraphApi
 }
 
 func (c *CustomerMgt) AuthByPhone(phone string, password string) (*Customer, error) {
@@ -42,12 +52,23 @@ func (c *CustomerMgt) AuthByPhone(phone string, password string) (*Customer, err
 	return customer, nil
 }
 
-func (c *CustomerMgt) Read(id string) *Customer {
-	return c.repo.Read(id)
+func (c *CustomerMgt) Read(id string) (*Customer, error) {
+	customer := c.Repo.Read(id)
+	if customer == nil {
+		return nil, errors.New("user " + id + " not found")
+	}
+	return customer, nil
+}
+
+func (c * CustomerMgt) List(keyword string, n int, skip int) []Customer {
+	return c.Repo.List(keyword, n, skip)
+}
+func (c *CustomerMgt) Count(keyword string) int {
+	return c.Repo.Count(keyword)
 }
 
 func (c *CustomerMgt) getFbUserSecure(accesstoken string) (*FbUserInfo, error) {
-	appInfo := c.fb.GetApp(accesstoken)
+	appInfo := c.Fb.GetApp(accesstoken)
 
 	if appInfo == nil {
 		return nil, errors.New("wrong access token")
@@ -57,7 +78,7 @@ func (c *CustomerMgt) getFbUserSecure(accesstoken string) (*FbUserInfo, error) {
 		return nil, errors.New("wrong facebook appid")
 	}
 
-	userInfo := c.fb.GetUser(accesstoken)
+	userInfo := c.Fb.GetUser(accesstoken)
 	if userInfo == nil {
 		return nil, errors.New("wrong access token")
 	}
@@ -70,7 +91,7 @@ func (c *CustomerMgt) AuthByFacebook(accesstoken string) (*Customer, error) {
 	if err != nil {
 		return nil, err
 	}
-	customer := c.repo.MatchByFbUserId(userInfo.Id)
+	customer := c.Repo.MatchByFbUserId(userInfo.Id)
 	if customer == nil {
 		return nil, errors.New("customer not found")
 	}
@@ -91,7 +112,7 @@ func (c *CustomerMgt) CreateFromFacebook(accesstoken string) string {
 		LastLogin: time.Now(),
 	}
 	
-	return c.repo.Create(&customer)
+	return c.Repo.Create(&customer)
 }
 
 func hashPassword(password string) string {
@@ -118,9 +139,9 @@ func (c *CustomerMgt) Create(password string, customer *Customer) (string) {
 	customer.FbAccessToken = ""
 	customer.IsAdmin = false
 	customer.Point = 0
-	return c.repo.Create(customer)
+	return c.Repo.Create(customer)
 }
 
 func (c *CustomerMgt) MatchByPhone(phone string) *Customer {
-	return c.repo.MatchByPhone(phone)
+	return c.Repo.MatchByPhone(phone)
 }
