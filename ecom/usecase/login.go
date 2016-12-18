@@ -1,9 +1,5 @@
 package usecase
 
-import (
-	"time"
-)
-
 type AddressL struct {
 	Phone string
 	Address string
@@ -13,7 +9,7 @@ type CustomerL struct {
 	Id string
 	Name string
 		
-	Point int32
+	Point int
 	IsAdmin bool
 
 	Email string
@@ -21,7 +17,8 @@ type CustomerL struct {
 	Addresses []AddressL
 }
 
+// usecase dont return error, for example, AuthByPhone alway return customer or panic
 type ILogin interface {
-	AuthByPhone(phone string, password string) (*CustomerL, error)
-	AuthByFacebook(userid string, accessToken string) (*CustomerL, error)
+	AuthByPhone(phone string, password string) *CustomerL
+	AuthByFacebook(accessToken string) *CustomerL
 }

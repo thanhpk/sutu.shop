@@ -8,18 +8,17 @@ type Login struct {
 	customerMgt model.ICustomerMgt
 }
 
-func (this Login) AuthByPhone(phone string, password string) (*CustomerL, error) {
-	customerid, err := this.customerMgt.AuthByPhone(phone, password)
+func (this *Login) AuthByPhone(phone string, password string) (*CustomerL, error) {
+	c, err := this.customerMgt.AuthByPhone(phone, password)
 	if err != nil {
 		return nil, err
 	}
 
-	c := this.customerMgt.Read(customerid)
 	customer := convertCustomerFromModel(c)
 	return customer, nil
 }
 
-func convertCustomerFromModel(c model.Customer) *CustomerL {
+func convertCustomerFromModel(c *model.Customer) *CustomerL {
 	customer := new(CustomerL)
 	customer.Id = c.Id
 	customer.Name = c.Name
@@ -30,17 +29,19 @@ func convertCustomerFromModel(c model.Customer) *CustomerL {
 	return customer
 }
 
-func (this Login) AuthByFacebook(accesstoken string) (*CustomerL, error) {
-
-	customerid, err := this.customerMgr.AuthByFacebook(accesstoken)
+func (this *Login) AuthByFacebook(accesstoken string) (*CustomerL, error) {
+	c, err := this.customerMgt.AuthByFacebook(accesstoken)
 	if err != nil {
-		customerid, err := this.customerMgr.CreateFromFacebook(accesstoken)
+		customerid := this.customerMgt.CreateFromFacebook(accesstoken)
+		if err != nil {
+			return nil, err
+		}
+		c, err = this.customerMgt.Read(customerid)
 		if err != nil {
 			return nil, err
 		}
 	}
-
-	c := this.customerMgt.Read(customerid)
+	
 	customer := convertCustomerFromModel(c)
 	return customer, nil
 }
