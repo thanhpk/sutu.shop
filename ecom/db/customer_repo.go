@@ -1,10 +1,12 @@
-package model
+package adapter
 
 import (
 	bson "gopkg.in/mgo.v2/bson"
 	mgo "gopkg.in/mgo.v2"
 	"github.com/thanhpk/sutu.shop/ecom/model"
 )
+
+type Customer model.Customer
 
 type list []interface{}
 
