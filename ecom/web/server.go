@@ -1,30 +1,49 @@
-package main
+package web
 
-import "github.com/kataras/iris"
-import "fmt"
+import (
+	"github.com/kataras/iris"
+	//"fmt"
+	"github.com/thanhpk/sutu.shop/ecom/usecase"
+)
 
-func main(){
+type Usecases struct {
+	BrowseProduct usecase.IBrowseProduct
+	Login usecase.ILogin
+	Registry usecase.IRe
+}
 
-  // http://localhost:5700/api/user/42
-  // Method: "GET"
-  iris.Get("/api/user/:id", func(ctx *iris.Context){
+type Web struct {
+}
 
-    // take the :id from the path, parse to integer
-    // and set it to the new userID local variable.
-    userID, err := ctx.ParamInt("id")
-		fmt.Println(userID, err)
-    // userRepo, imaginary database service <- your only job.
-    
+func (w *Web) Run(port string, ucs Usecases) {
+	server := iris.New()
+	server.OnError(iris.StatusNotFound, func(ctx *iris.Context) {
+		ctx.Write("Customer 404 not found error page")
+	})
 
-    // send back a response to the client,
-    // .JSON: content type as application/json; charset="utf-8"
-    // iris.StatusOK: with 200 http status code.
-    //
-    // send user as it is or make use of any json valid golang type,
-    // like the iris.Map{"username" : user.Username}.
-    ctx.JSON(iris.StatusOK, user)
+	server.OnError(iris.StatusInternalServerError, func(ctx *iris.Context) {
+		ctx.Write("")
+	})
 
-  })
+	route(server, ucs)
 
-  iris.Listen("localhost:5700")
+	server.Listen(":" + port)
+}
+
+func route(app *iris.Framework, ucs Usecases) {
+	iris.Post("/login/authbyfacebook/:accesstoken", func(ctx *iris.Context) {
+		customer := ucs.Login.AuthByFacebook(ctx.Param("accesstoken"))
+		ctx.JSON(iris.StatusOK, customer)
+	}, func(ctx *iris.Context) {
+		ctx.EmitError(iris.StatusInternalServerError)
+	});
+
+	iris.Post("/login/authbyphone", func(ctx *iris.Context) {
+		phone := ctx.FormValueString("phone")
+		password := ctx.FormValueString("password")
+		customer := ucs.Login.AuthByPhone(phone, password)
+		ctx.JSON(iris.StatusOK, customer)
+	}, func(ctx *iris.Context) {
+		ctx.EmitError(iris.StatusInternalServerError)
+	});
 }
