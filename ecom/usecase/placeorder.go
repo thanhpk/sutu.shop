@@ -1,6 +1,5 @@
 package usecase
 
-
 type AddressPO struct {
 	Id string
 	Phone string
@@ -9,12 +8,12 @@ type AddressPO struct {
 
 type ItemPO struct {
 	ProductId string
-	Quantity int32
+	Quantity int
 }
 
 type ItemDetailsPO struct {
 	ItemPO
-	TotalPrice int32
+	TotalPrice int
 }
 
 type OrderPO struct {
@@ -23,15 +22,15 @@ type OrderPO struct {
 	Items []ItemPO
 }
 
-type OrderDetails struct {
-	Order
+type OrderDetailsPO struct {
+	OrderPO
 	Items []ItemDetailsPO
-	TotalPrice int32
+	TotalPrice int
 }
 
 type IPlaceOrder interface {
-	GetOrderDetails(userid string, order Order) OrderDetailsPO
-	SaveAddress(userid string, address Address) string
+	GetOrderDetails(userid string, order OrderPO) OrderDetailsPO
+	SaveAddress(userid string, address AddressPO) string
 	GetAddresses(useid string) []AddressPO
-	PlaceOrder(userid string, ip string, order Order)
+	PlaceOrder(userid string, ip string, order OrderPO)
 }

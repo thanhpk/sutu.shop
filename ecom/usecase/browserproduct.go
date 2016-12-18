@@ -59,7 +59,7 @@ type CategoryBP struct {
 	Parent *CategoryBP
 }
 
-type IBrowserProduct interface {
+type IBrowseProduct interface {
 	ListRecentSale() []SaleBP
 	ListMostLovedProducts() []ProductBP
 	ListNewArriveProducts() []ProductBP
