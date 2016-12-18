@@ -1,5 +1,5 @@
 version: '2'
 services:
-    ui: {build: {context: /home/thanh/workspace/sutu.shop/ecom/ui}, image: 'thanhpk/sutu.shop:ui', volumes: ['./ui:/srv/sutu.shop.ui'], ports: ['8080:8080']}
-    PROD.ecom: {image: 'thanhpk/sutu.shop:ecom0.1', build: {context: /home/thanh/workspace/sutu.shop/ecom}}
+    ecom: {image: 'thanhpk/sutu.shop.ecom:0.1', build: {context: /home/thanh/src/github.com/thanhpk/sutu.shop/ecom}, volumes: ['../../../../:/app/src'], environment: [GOPATH=/app], links: ['mongo:mongo'], ports: ['8080:8080']}
+    mongo: {image: mvertes/alpine-mongo, volumes: ['/tmp/ecomdb:/data/db']}
 

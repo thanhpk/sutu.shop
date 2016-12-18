@@ -1,8 +1,19 @@
-service: '2'
+version: '2'
 
 services:
   ecom:
-    image: thanhpk/sutu.shop:ecom0.1
+    image: thanhpk/sutu.shop.ecom:0.1
     build:
       context: .
-    
+    volumes:
+      - "../../../../:/app/src"
+    environment:
+      - GOPATH=/app
+    links:
+      - mongo:mongo
+    ports:
+      - 8080:8080
+  mongo:
+    image: mvertes/alpine-mongo
+    volumes:
+      - "/tmp/ecomdb:/data/db"

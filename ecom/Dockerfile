@@ -1,3 +1,5 @@
-from mhart/alpine-node:latest
+from golang:1.6.4-alpine
 
-cmd ["echo", "123"]
+WORKDIR /app/src/github.com/thanhpk/sutu.shop/ecom
+
+CMD go run main.go
