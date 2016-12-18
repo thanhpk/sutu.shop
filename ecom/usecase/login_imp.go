@@ -5,17 +5,17 @@ import (
 )
 
 type Login struct {
-	customerMgt model.ICustomerMgt
+	CustomerMgt model.ICustomerMgt
 }
 
-func (this *Login) AuthByPhone(phone string, password string) (*CustomerL, error) {
-	c, err := this.customerMgt.AuthByPhone(phone, password)
+func (this Login) AuthByPhone(phone string, password string) (*CustomerL) {
+	c, err := this.CustomerMgt.AuthByPhone(phone, password)
 	if err != nil {
-		return nil, err
+		return nil
 	}
 
 	customer := convertCustomerFromModel(c)
-	return customer, nil
+	return customer
 }
 
 func convertCustomerFromModel(c *model.Customer) *CustomerL {
@@ -29,21 +29,21 @@ func convertCustomerFromModel(c *model.Customer) *CustomerL {
 	return customer
 }
 
-func (this *Login) AuthByFacebook(accesstoken string) (*CustomerL, error) {
-	c, err := this.customerMgt.AuthByFacebook(accesstoken)
+func (this Login) AuthByFacebook(accesstoken string) (*CustomerL) {
+	c, err := this.CustomerMgt.AuthByFacebook(accesstoken)
 	if err != nil {
-		customerid := this.customerMgt.CreateFromFacebook(accesstoken)
+		customerid := this.CustomerMgt.CreateFromFacebook(accesstoken)
 		if err != nil {
-			return nil, err
+			return nil
 		}
-		c, err = this.customerMgt.Read(customerid)
+		c, err = this.CustomerMgt.Read(customerid)
 		if err != nil {
-			return nil, err
+			return nil
 		}
 	}
 	
 	customer := convertCustomerFromModel(c)
-	return customer, nil
+	return customer
 }
 
 
