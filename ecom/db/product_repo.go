@@ -1,7 +1,7 @@
-package adapter
+package db
 
 import (
-	bson "gopkg.in/mgo.v2/bson"
+//	bson "gopkg.in/mgo.v2/bson"
 	mgo "gopkg.in/mgo.v2"
 )
 
