@@ -1,7 +1,7 @@
 package web
 
 import (
-	//"github.com/iris-contrib/middleware/recovery"
+	"github.com/iris-contrib/middleware/recovery"
 	"github.com/kataras/iris"
 	"fmt"
 	"github.com/thanhpk/sutu.shop/ecom/usecase"
@@ -32,7 +32,7 @@ func (w *Web) Run(port string, ucs Usecases) {
 }
 
 func route(app *iris.Framework, ucs Usecases) {
-//	app.Use(recovery.New())
+	app.Use(recovery.New())
 	app.Get("/login/authbyfacebook/:accesstoken", func(ctx *iris.Context) {
 		accesstoken := ctx.Param("accesstoken")
 		customer := ucs.Login.AuthByFacebook(accesstoken)
