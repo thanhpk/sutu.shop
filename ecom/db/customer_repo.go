@@ -1,22 +1,11 @@
 package db
 
 import (
-	//"fmt"
 	"errors"
 	bson "gopkg.in/mgo.v2/bson"
 	mgo "gopkg.in/mgo.v2"
 	"github.com/thanhpk/sutu.shop/ecom/model"
 )
-
-func AttachId(obj interface{}, id bson.ObjectId) bson.M{
-	doc := bson.D{}
-	marshalledObj, _ := bson.Marshal(obj)
-	bson.Unmarshal(marshalledObj, &doc)
-	docMap := doc.Map()
-	docMap["_id"] = id;
-	delete(docMap, "Id")
-	return docMap
-}
 
 type list []interface{}
 
@@ -42,7 +31,7 @@ func (cr MongoCustomerRepository) Create(customer *model.Customer) string {
 	if err != nil {
 		panic (err)
 	}
-	return string(newid)
+	return newid.Hex()
 }
 
 func (cr MongoCustomerRepository) Count(keyword string) int {
@@ -85,9 +74,12 @@ func (cr MongoCustomerRepository) Read(id string) *model.Customer {
 
 func (cr MongoCustomerRepository) MatchByPhone(phone string) *model.Customer {
 	customer := model.Customer{}
-	err := cr.customerCollection.Find(bson.M{"Phone": phone}).One(&customer)
+	err := cr.customerCollection.Find(bson.M{"phone": phone}).One(&customer)
 	if err != nil {
-		return nil
+		if err == mgo.ErrNotFound {
+			return nil
+		}
+		panic(err)
 	}
 	return &customer
 }
