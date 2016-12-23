@@ -4,6 +4,7 @@ import (
 	"time"
 	"errors"
 	"golang.org/x/crypto/bcrypt"
+	"fmt"
 )
 
 type ICustomerRepository interface {
@@ -41,7 +42,7 @@ type CustomerMgt struct {
 
 func (c *CustomerMgt) AuthByPhone(phone string, password string) (*Customer, error) {
 	customer := c.MatchByPhone(phone)
-	if customer != nil { return nil, errors.New("phone number existed") }
+	if customer == nil { return nil, errors.New("phone number doesn't existed") }
 
 	if customer.HashedPassword == "" {
 		return nil, errors.New("user are not login using phone, use fb to login instead")
@@ -132,6 +133,7 @@ func (c *CustomerMgt) Create(password string, customer *Customer) (string) {
 			panic("phone number is already existed")
 		}
 	}
+	
 	customer.HashedPassword = hashPassword(password)
 	customer.CreateTime = time.Now()
 	customer.LastLogin = time.Now()
@@ -139,6 +141,7 @@ func (c *CustomerMgt) Create(password string, customer *Customer) (string) {
 	customer.FbAccessToken = ""
 	customer.IsAdmin = false
 	customer.Point = 0
+	fmt.Println("gret")
 	return c.Repo.Create(customer)
 }
 

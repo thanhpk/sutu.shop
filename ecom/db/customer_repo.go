@@ -9,15 +9,9 @@ import (
 
 type list []interface{}
 
-type IdCustomer struct {
-	*model.Customer
-	_id bson.ObjectId
-}
-
 type MongoCustomerRepository struct {
 	customerCollection *mgo.Collection
 }
-//session.DB(database).C(collection)
 
 func NewMongoCustomerRepository(dbname string, dbSession *mgo.Session, context string) *MongoCustomerRepository {
 	cr := MongoCustomerRepository{}
@@ -81,6 +75,7 @@ func (cr MongoCustomerRepository) MatchByPhone(phone string) *model.Customer {
 		}
 		panic(err)
 	}
+	customer.Id = bson.ObjecId(customer.Id).String()
 	return &customer
 }
 
