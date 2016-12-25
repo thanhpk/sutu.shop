@@ -5,58 +5,44 @@ import (
 )
 
 type ProductType struct {
-	Id string `json:"id" bson:"_id,omitempty"`
+	Id string
 	Name string
 	Description string
-	NumverOfView int
+	NumberOfView int
 	NumberOfLove int
 	Price int
 	BrandId string
 	CategoryId string
+	NewArrived bool
 }
 
 type IProductTypeMgt interface {
-	
-}
-
-type ProductTypeMgt struct {
-	
-}
-
-type IProductTypeRepository interface {
-	Create(*ProductType) string
-	Count(search string) string
-	List(keyword string, n int, p int) []ProductType
-	Update(*ProductType) string
-	Read(id string) *ProductType
+	Read(typeid string) *ProductType
+	ListNewArrivedProductTypes() []ProductType
+	ListMostLovedProductTypes(fromtime int) []ProductType
+	ReadProduct(productid string) *Product
+	ListProductByType(typeid string) []Product
 }
 
 type Brand struct {
 	Id string `json:"id" bson:"_id,omitempty"`
 	Name string
+	Url string
 	Description string
 	LogoImage string
 	CoverImage string
 }
 
-type IBrandRepository interface {
-	Create(*Brand) string
-	Count(search string) string
-	List(keyword string, n int, p int) []Brand
-	Update(*Brand) string
+type IBrandMgt interface {
 	Read(id string) *Brand
 }
 
 type VarianceType struct {
-	Id string `json:"id" bson:"_id,omitempty"`
+	Id string `bson:"_id"`
 	Name string
 }
 
-type IVarianceTypeRepository interface {
-	Create(*VarianceType) string
-	Count(search string) string
-	List(keyword string, n int, p int) []VarianceType
-	Update(*VarianceType) string
+type IVarianceTypeMgt interface {
 	Read(id string) *VarianceType
 }
 
@@ -66,7 +52,7 @@ type Variance struct {
 }
 
 type Product struct {
-	Id string `json:"id" bson:"_id,omitempty"`
+	Id string `bson:"_id"`
 	Quantity int
 	TypeId string
 	Name string
@@ -75,14 +61,6 @@ type Product struct {
 	Description string
 	Images []string
 	Variances []Variance
-}
-
-type IProductRepository interface {
-	Create(*Product) string
-	Count(search string) string
-	List(keyword string, n int, p int) []Product
-	Update(*Product) string
-	Read(id string) *Product
 }
 
 const ORDER_PLACED = 0
@@ -96,7 +74,7 @@ type Item struct {
 }
 
 type Order struct {
-	Id string `json:"id" bson:"_id,omitempty"`
+	Id string `bson:"_id,omitempty"`
 	Code string
 	ShippingAddressId string
 	UserIp string
@@ -109,17 +87,12 @@ type Order struct {
 	LastModifiedTime time.Time
 }
 
-type IOrderRepository interface {
-	Create(*Order) string
-	Count(keyword string) string
-	List(keyword string, n int, p int) []Order
-	Update(*Order) string
-	Read(id string) *Order
-	Match(code string) *Order
+type ISaleMgt interface {
+	ListRunningSales() []Sale
 }
 
 type Sale struct {
-	Id string `json:"id" bson:"_id,omitempty"`
+	Id string `bson:"_id"`
 	Name string
 	Code string
 	StartTime time.Time
@@ -128,30 +101,17 @@ type Sale struct {
 	QuanlificationCode string
 }
 
-type ISaleRepository interface {
-	Create(*Sale) string
-	Count(keyword string) string
-	List(keyword string, n int, p int) []Sale
-	Update(*Sale) string
-	Read(id string) *Sale
-	Match(code string) *Sale
-}
-
 type Category struct {
-	Id string `json:"id" bson:"_id,omitempty"`
-	
+	Id string `bson:"_id"`
 	Name string
-	Path string
-	Parent *Category
+	Url string
+	Children []*Category
+	ParentId string
 }
 
-type ICategoryRepository interface {
-	Create(*Category) string
-	Count(keyword string) string
-	List(keyword string, n int, p int) []Category
-	Update(*Category) string
+type ICategoryMgt interface {
 	Read(id string) *Category
-	Match(code string) *Category
+	GetRoot() *Category
 }
 
 type Address struct {
@@ -159,17 +119,8 @@ type Address struct {
 	Address string
 }
 
-type IAddressRepository interface {
-	Create(*Address) string
-	Count(keyword string) string
-	List(keyword string, n int, p int) []Address
-	Update(*Address) string
-	Read(id string) *Address
-	Match(code string) *Address
-}
-
 type Customer struct {
-	Id string `json:"id" bson:"_id,omitempty"`
+	Id string `bson:"_id"`
 	Name string
 	HashedPassword string
 	Point int
@@ -185,7 +136,6 @@ type Customer struct {
 	CreateTime time.Time
 	LastLogin time.Time
 }
-
 
 type Auth interface {
 	Authenticate(id string, password string) bool

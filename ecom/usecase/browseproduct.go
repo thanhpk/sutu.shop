@@ -52,17 +52,13 @@ type ProductBP struct {
 	Variances []VarianceBP
 }
 
-type ProductDetailsBP struct {
-	ProductBP
-	Description string
-}
-
 type CategoryBP struct {
 	Id string
 	
 	Name string
 	Url string
-	Parent *CategoryBP
+	ParentId string
+	Children []CategoryBP
 }
 
 type IBrowseProduct interface {
@@ -74,5 +70,5 @@ type IBrowseProduct interface {
 	GetProductTypesByCategory(categoryid string) []ProductTypeBP
 	GetProductType(id string) *ProductTypeBP
 	GetProductsByType(typeid string) []ProductBP
-	GetProductDetails(productid string) *ProductDetailsBP	
+	GetProductDetails(productid string) *ProductBP
 }

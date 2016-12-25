@@ -10,6 +10,7 @@ type BrowseProduct struct {
 	BrandMgt model.IBrandMgt
 	CategoryMgt model.ICategoryMgt
 	VarianceTypeMgt model.IVarianceTypeMgt
+	SaleMgt model.ISaleMgt
 }
 
 func ConvertSaleFromModel(model *model.Sale) *SaleBP {
@@ -28,17 +29,23 @@ func ConvertSaleFromModel(model *model.Sale) *SaleBP {
 	return &sale
 }
 
-func ConvertCategoryFromModel(model *model.Category) *CategoryBP{
+func ConvertCategoryFromModel(model *model.Category) *CategoryBP {
 	if model == nil {
 		return nil
 	}
 	
-	categorydp := CategoryBP{}
-	categorydp.Id = model.Id
-	categorydp.Name = model.Name
-	categorydp.Url = model.Url
-	categorydp.Parent = ConvertCategoryFromModel(model.Parent)
-	return &categorydp
+	categorybp := CategoryBP{}
+	categorybp.Id = model.Id
+	categorybp.Name = model.Name
+	categorybp.Url = model.Url
+	categorybp.ParentId = model.ParentId
+
+	categorybp.Children = make([]CategoryBP, len(model.Children))
+	for idx, child := range model.Children {
+		categorybp.Children[idx] = ConvertCategoryFromModel(child)
+	}
+	
+	return &categorybp
 }
 
 func ConvertBrandFromModel(model *model.Brand) *BrandBP {
@@ -106,7 +113,7 @@ func ConvertProductTypeFromModel(model *model.ProductType, categoryModel *model.
 }
 
 func (bp *BrowseProduct) ListRecentSales() []SaleBP {
-	sales := bp.ProductTypeMgt.ListRunningSales(0, 3)
+	sales := bp.SaleMgt.ListRunningSales()
 	salebps := make([]SaleBP, len(sales))
 	for idx, sale := range sales {
 		salebps[idx] = ConvertSaleFromModel(&sale)
@@ -166,7 +173,7 @@ func (bp *BrowseProduct) GetProductsByType(typeid string) []ProductBP {
 	return producttypebps		
 }
 
-func (bp *BrowseProduct) GetProductDetails(productid string) *ProductDetailsBP {
+func (bp *BrowseProduct) GetProductDetails(productid string) *ProductBP {
 	product := bp.ProductTypeMgt.ReadProduct(productid)
 	return bp.ConvertProductFromModel(product)
 }

@@ -7,8 +7,6 @@ type IProductRepository interface {
 
 type IProductTypeRepository interface {	
 	Create(*ProductType) string
-	Count(search string) string
-	List(keyword string, n int, p int) []ProductType
 	Update(*ProductType) string
 	Read(id string) *ProductType
 	ListByArrived() []ProductType
