@@ -21,7 +21,8 @@ type IProductTypeMgt interface {
 	ListNewArrivedProductTypes() []ProductType
 	ListMostLovedProductTypes(fromtime int) []ProductType
 	ReadProduct(productid string) *Product
-	ListProductByType(typeid string) []Product
+	ListProductsByType(typeid string) []Product
+	ListByCategory(categoryid string) []ProductType
 }
 
 type Brand struct {

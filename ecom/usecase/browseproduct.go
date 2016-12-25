@@ -58,7 +58,7 @@ type CategoryBP struct {
 	Name string
 	Url string
 	ParentId string
-	Children []CategoryBP
+	Children []*CategoryBP
 }
 
 type IBrowseProduct interface {

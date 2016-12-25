@@ -2,7 +2,6 @@ package usecase
 
 import (
 	model "github.com/thanhpk/sutu.shop/ecom/model"
-	"time"
 )
 
 type BrowseProduct struct {
@@ -40,7 +39,7 @@ func ConvertCategoryFromModel(model *model.Category) *CategoryBP {
 	categorybp.Url = model.Url
 	categorybp.ParentId = model.ParentId
 
-	categorybp.Children = make([]CategoryBP, len(model.Children))
+	categorybp.Children = make([]*CategoryBP, len(model.Children))
 	for idx, child := range model.Children {
 		categorybp.Children[idx] = ConvertCategoryFromModel(child)
 	}
@@ -116,18 +115,18 @@ func (bp *BrowseProduct) ListRecentSales() []SaleBP {
 	sales := bp.SaleMgt.ListRunningSales()
 	salebps := make([]SaleBP, len(sales))
 	for idx, sale := range sales {
-		salebps[idx] = ConvertSaleFromModel(&sale)
+		salebps[idx] = *ConvertSaleFromModel(&sale)
 	}
 	return salebps
 }
 
 func (bp *BrowseProduct) ListMostLovedProductTypes() []ProductTypeBP {
-	producttypes := bp.ProductTypeMgt.ListMostLovedProductTypes(30*time.Day)
+	producttypes := bp.ProductTypeMgt.ListMostLovedProductTypes(30*3600)
 	producttypebps := make([]ProductTypeBP, len(producttypes))
 	for idx, producttype := range producttypes {
 		brand := bp.BrandMgt.Read(producttype.BrandId)
 		category := bp.CategoryMgt.Read(producttype.CategoryId)
-		producttypebps[idx] = ConvertProductTypeFromModel(&producttype, category, brand)
+		producttypebps[idx] = *ConvertProductTypeFromModel(&producttype, category, brand)
 	}
 	return producttypebps
 }
@@ -138,7 +137,7 @@ func (bp *BrowseProduct) ListNewArrivedProductTypes() []ProductTypeBP {
 	for idx, producttype := range producttypes {
 		brand := bp.BrandMgt.Read(producttype.BrandId)
 		category := bp.CategoryMgt.Read(producttype.CategoryId)
-		producttypebps[idx] = ConvertProductTypeFromModel(&producttype, category, brand)
+		producttypebps[idx] = *ConvertProductTypeFromModel(&producttype, category, brand)
 	}
 	return producttypebps
 }
@@ -149,28 +148,30 @@ func (bp *BrowseProduct) GetCategoryTree() *CategoryBP {
 }
 
 func (bp *BrowseProduct) GetProductTypesByCategory(categoryid string) []ProductTypeBP {
-	producttypes := bp.ProductTypeMgt.ListByCategory(categorystring)
+	producttypes := bp.ProductTypeMgt.ListByCategory(categoryid)
 	producttypebps := make([]ProductTypeBP, len(producttypes))
 	for idx, producttype := range producttypes {
 		brand := bp.BrandMgt.Read(producttype.BrandId)
 		category := bp.CategoryMgt.Read(producttype.CategoryId)
-		producttypebps[idx] = ConvertProductTypeFromModel(&producttype, category, brand)
+		producttypebps[idx] = *ConvertProductTypeFromModel(&producttype, category, brand)
 	}
 	return producttypebps	
 }
 
 func (bp *BrowseProduct) GetProductType(id string) *ProductTypeBP {
 	producttype := bp.ProductTypeMgt.Read(id)
-	return ConvertProductTypeFromModel(producttype)
+	brand := bp.BrandMgt.Read(producttype.BrandId)
+	category := bp.CategoryMgt.Read(producttype.CategoryId)
+	return ConvertProductTypeFromModel(producttype, category, brand)
 }
 
 func (bp *BrowseProduct) GetProductsByType(typeid string) []ProductBP {
-	products := bp.ProductType.ListProductsByType(typeid)
+	products := bp.ProductTypeMgt.ListProductsByType(typeid)
 	productbps := make([]ProductBP, len(products))
 	for idx, product := range products {
-		producttypebps[idx] = bp.ConvertProductFromModel(&product)
+		productbps[idx] = *bp.ConvertProductFromModel(&product)
 	}
-	return producttypebps		
+	return productbps	
 }
 
 func (bp *BrowseProduct) GetProductDetails(productid string) *ProductBP {

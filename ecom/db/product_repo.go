@@ -22,14 +22,13 @@ func (me *MongoProductRepository) Update(producttype *model.ProductType) {
 	var typeM bson.M
 	bson.Unmarshal(typeBson, &typeM)
 	delete(map[string]interface{}(typeM), "_id")
-	
-	err := me.typeCollection.UpdateId(idobj, bson.M{"$set": typeM})
+	err := me.productCollection.UpdateId(idobj, bson.M{"$set": typeM})
 	if err != nil {
 		panic(err)
 	}
 }
 
-func (me *MongoProductRepository) Read(id string) *model.Product {
+func (me *MongoProductRepository) Read(idhex string) *model.Product {
 	var idobj = bson.ObjectIdHex(idhex)
 	product := model.Product{}
 	err := me.productCollection.FindId(idobj).One(&product)
@@ -43,7 +42,7 @@ func (me *MongoProductRepository) Read(id string) *model.Product {
 
 func (me *MongoProductRepository) ListByType(typeid string) []model.Product {
 	products := []model.Product{}
-	err := cr.productCollection.Find(bson.M{"TypeId": bson.ObjectIdHex(typeid)}).All(&products)
+	err := me.productCollection.Find(bson.M{"TypeId": bson.ObjectIdHex(typeid)}).All(&products)
 	if err != nil {
 		panic (err)
 	}
