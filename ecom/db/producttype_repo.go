@@ -1,6 +1,5 @@
 package db
 
-
 import (
 	"github.com/thanhpk/sutu.shop/ecom/model"
 	bson "gopkg.in/mgo.v2/bson"
@@ -8,8 +7,7 @@ import (
 )
 
 type MongoProductTypeRepository struct {
-	typeCollection *mgo.Collection
-	
+	typeCollection *mgo.Collection	
 }
 
 func NewMongoProductTypeRepository(dbname string, dbSession *mgo.Session, context string) *MongoProductTypeRepository {
@@ -54,6 +52,16 @@ func (me *MongoProductTypeRepository) ListByArrived() []model.ProductType {
 func (me *MongoProductTypeRepository) ListByLove() []model.ProductType {
 	producttypes := []model.ProductType{}
 	err := me.typeCollection.Find(nil).Sort("-NumberOfLove").Skip(0).Limit(10).All(&producttypes)
+	if err != nil {
+		panic (err)
+	}
+	return producttypes
+}
+
+
+func (me *MongoProductTypeRepository) ListByCategory(categoryid string) []model.ProductType {
+	producttypes := []model.ProductType{}
+	err := me.typeCollection.Find(bson.M{"CategoryId": bson.ObjectIdHex(categoryid)}).Sort("-NumberOfLove").Skip(0).Limit(10).All(&producttypes)
 	if err != nil {
 		panic (err)
 	}
