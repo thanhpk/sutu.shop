@@ -24,24 +24,30 @@ type VarianceBP struct {
 	Value string
 }
 
+type BrandBP struct {
+	Id string
+	Name string
+	Url string
+	LogoImage string
+}
+
 type ProductTypeBP struct {
 	Id string
 	Name string
 	Description string
-	NumverOfView int32
-	NumberOfLove int32
-	Price int32
-	BrandName string
-	CategoryId string
+	NumberOfView int
+	NumberOfLove int
+	Price int
+	Category *CategoryBP
+	Brand *BrandBP
 }
 
 type ProductBP struct {
 	Id string
 	IsInStock bool
-	Type ProductTypeBP
 	Name string
-	Price int32
-	SalePrice int32
+	Price int
+	SalePrice int
 	Images []string
 	Variances []VarianceBP
 }
@@ -55,16 +61,18 @@ type CategoryBP struct {
 	Id string
 	
 	Name string
-	Path string
+	Url string
 	Parent *CategoryBP
 }
 
 type IBrowseProduct interface {
-	ListRecentSale() []SaleBP
-	ListMostLovedProducts() []ProductBP
-	ListNewArriveProducts() []ProductBP
+	ListRecentSales() []SaleBP
+	ListMostLovedProductTypes() []ProductTypeBP
+	ListNewArrivedProductTypes() []ProductTypeBP
 
-	GetCategoryTree() []CategoryBP
-	ListProductByCategory() []ProductBP
-	GetProductDetails(productid string) *ProductDetailsBP
+	GetCategoryTree() *CategoryBP
+	GetProductTypesByCategory(categoryid string) []ProductTypeBP
+	GetProductType(id string) *ProductTypeBP
+	GetProductsByType(typeid string) []ProductBP
+	GetProductDetails(productid string) *ProductDetailsBP	
 }
