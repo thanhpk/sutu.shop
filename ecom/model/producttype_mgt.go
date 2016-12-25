@@ -2,7 +2,7 @@ package model
 
 type IProductRepository interface {
 	Read(id string) *Product
-	ListByType(tpeid string) []Product
+	ListByType(typeid string) []Product
 }
 
 type IProductTypeRepository interface {	
