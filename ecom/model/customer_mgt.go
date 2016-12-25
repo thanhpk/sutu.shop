@@ -11,7 +11,7 @@ type ICustomerRepository interface {
 	Create(*Customer) string
 	Count(keyword string) int
 	List(keyword string, n int, skip int) []Customer
-	Update(*Customer) error
+	Update(*Customer)
 	Read(id string) *Customer
 	MatchByPhone(string) *Customer
 	MatchByFbUserId(string) *Customer

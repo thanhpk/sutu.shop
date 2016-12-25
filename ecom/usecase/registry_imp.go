@@ -11,7 +11,7 @@ type Registry struct {
 func (this Registry) Registry(phone string, password string) string {
 	customer := &model.Customer{Phone: phone}
 	customerid := this.CustomerMgt.Create(password, customer)
-	return customerid
+	return customerid;
 }
 
 func (this Registry) IsDuplicated(phone string) bool {

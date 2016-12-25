@@ -45,5 +45,3 @@ func (this Login) AuthByFacebook(accesstoken string) (*CustomerL) {
 	customer := convertCustomerFromModel(c)
 	return customer
 }
-
-
