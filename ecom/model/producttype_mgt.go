@@ -6,8 +6,8 @@ type IProductRepository interface {
 }
 
 type IProductTypeRepository interface {	
-	Create(*ProductType) string
-	Update(*ProductType) string
+//	Create(*ProductType) string
+	Update(*ProductType)
 	Read(id string) *ProductType
 	ListByArrived() []ProductType
 	ListByLove() []ProductType
@@ -16,6 +16,24 @@ type IProductTypeRepository interface {
 type ProductTypeMgt struct {
 	Repo IProductTypeRepository
 	ProductRepo IProductRepository
+}
+
+func (me *ProductTypeMgt) Love(typeid string) {
+	producttype := me.Read(typeid)
+	if producttype == nil {
+		panic "not found product type " + typeid
+	}
+	producttype.NumberOfLove = producttype.NumberOfLove + 1
+	me.Update(producttype)
+}
+
+func (me *ProductTypeMgt) View(typeid string) {
+	producttype := me.Read(typeid)
+	if producttype == nil {
+		panic "not found product type " + typeid
+	}
+	producttype.NumberOfView = producttype.NumberOfView + 1
+	me.Update(producttype)
 }
 
 func (me *ProductTypeMgt) Read(typeid string) *ProductType {
