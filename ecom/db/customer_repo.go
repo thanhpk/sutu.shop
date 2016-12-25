@@ -1,7 +1,6 @@
 package db
 
 import (
-	"errors"
 	bson "gopkg.in/mgo.v2/bson"
 	mgo "gopkg.in/mgo.v2"
 	"github.com/thanhpk/sutu.shop/ecom/model"
@@ -46,23 +45,29 @@ func (cr MongoCustomerRepository) List(keyword string, n int, skip int) []model.
 	return customers
 }
 
-func (cr MongoCustomerRepository) Update(customer *model.Customer) error {
-	err := cr.customerCollection.UpdateId(customer.Id, bson.M{"$set": customer})
+func (cr MongoCustomerRepository) Update(customer *model.Customer) {
+	idobj := bson.ObjectIdHex(customer.Id)
+
+	// create update json, remove id from the json
+	customerBson, _ := bson.Marshal(customer)
+	var customerM bson.M
+	bson.Unmarshal(customerBson, &customerM)
+	delete( map[string]interface{}(customerM), "_id")
+	
+	err := cr.customerCollection.UpdateId(idobj, bson.M{"$set": customerM})
 	if err != nil {
-		if err == mgo.ErrNotFound {
-			return errors.New("not found")
-		}
 		panic(err)
 	}
-	return nil
 }
 
-func (cr MongoCustomerRepository) Read(id string) *model.Customer {
+func (cr MongoCustomerRepository) Read(idhex string) *model.Customer {
+	var idobj = bson.ObjectIdHex(idhex)
 	customer := model.Customer{}
-	err := cr.customerCollection.FindId(id).One(&customer)
+	err := cr.customerCollection.FindId(idobj).One(&customer)
 	if err != nil {
 		return nil
 	}
+	customer.Id = bson.ObjectId(customer.Id).Hex()
 	return &customer
 }
 
@@ -75,7 +80,7 @@ func (cr MongoCustomerRepository) MatchByPhone(phone string) *model.Customer {
 		}
 		panic(err)
 	}
-	customer.Id = bson.ObjecId(customer.Id).String()
+	customer.Id = bson.ObjectId(customer.Id).Hex()
 	return &customer
 }
 
