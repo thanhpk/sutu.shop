@@ -1,0 +1,10 @@
+.cart .flaticon-bag:before {
+    font-size: 30px;
+    margin-left: 0;
+}
+
+.cart {
+		position: fixed;
+		top: 20px;
+		z-index: 1000;
+}
