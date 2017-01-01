@@ -7,6 +7,7 @@ import Home from './components/Home';
 import BuyLayout from './components/BuyLayout.vue';
 import Category from './components/Category.vue';
 import Product from './components/Product.vue';
+import FbScript from './components/FbScript.vue';
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
@@ -31,6 +32,8 @@ const router = new VueRouter({
 														 
 /* eslint-disable no-new */
 const app = new Vue({
-	router: router
+	router: router,
+	components: {
+		fbscript: FbScript
+	}
 }).$mount('#app');
-
