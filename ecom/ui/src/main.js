@@ -1,15 +1,16 @@
 import Vue from 'vue';
 
-import BootstrapVue from 'bootstrap-vue';
-
 import VueRouter from  'vue-router';
-import Home from './components/Home';
+import Home from './components/Home.vue';
 import BuyLayout from './components/BuyLayout.vue';
 import Category from './components/Category.vue';
 import Product from './components/Product.vue';
 import FbScript from './components/FbScript.vue';
 
-Vue.use(BootstrapVue);
+import '../static/bower_components/animate.css/animate.min.css';
+import '../static/fonts/flaticon.css';
+import '../static/app.css';
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -30,8 +31,7 @@ const router = new VueRouter({
 	]
 });
 														 
-/* eslint-disable no-new */
-const app = new Vue({
+new Vue({
 	router: router,
 	components: {
 		fbscript: FbScript
