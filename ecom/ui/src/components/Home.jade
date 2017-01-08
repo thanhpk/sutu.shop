@@ -1,6 +1,5 @@
 div
   .container
-    cart.cart
     .header
       .row.animated.bounce
       .text-center.mtverybig
@@ -14,11 +13,33 @@ div
             router-link(to="/about") San pham
           li  
             router-link(to="/brand") Brand
-          li  
-            router-link(to="/blog") Blog
-          li  
-            router-link(to="/aboud") About us
+          li
+            span
+              i.flaticon-magnifying-glass
+              .dropdownhover
+                .button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") 
+                  span.flaticon-menu
+                ul.dropdown-menu
+                  li
+                    a(href="#") Action 
+                  li
+                    a(href="#") Another action
+                  li
+                    a(href="#") Something else here
+
   .container
+    .row
+      .dropdownhover.dropdown
+        .button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") 
+          span.flaticon-menu
+        ul.dropdown-menu
+          li
+            a(href="#") Action 
+          li
+            a(href="#") Another action
+          li
+            a(href="#") Something else here
+
     .row
       carousel#carousel-example-generic.carousel.slide.col-sm-12(data-ride="carousel")
         ol.carousel-indicators
@@ -40,8 +61,40 @@ div
               h3 Caption text
   .container
     .row
+      .col-sm-12.mtbig.text-center
+        h2 Nha phan phoi dau goi kho batiste chinh hang duy nhat tai Ha Noi
+        
+    .row
+      .col-sm-12
+        .gal-item(style="padding:20px")
+          .gal-item-wrapper
+            .figure.gal-item-inner                                
+              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/1-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/1-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/1-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")         
+        .gal-item(style="padding:20px")
+          .gal-item-wrapper
+            .figure.gal-item-inner                                
+              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
+        .gal-item(style="padding:20px")
+          .gal-item-wrapper
+            .figure.gal-item-inner                                
+              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
+        .gal-item(style="padding:20px")
+          .gal-item-wrapper
+            .figure.gal-item-inner                                
+              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/6-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/6-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/6-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
+        .gal-item(style="padding:20px")
+          .gal-item-wrapper
+            .figure.gal-item-inner                                
+              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
+        .gal-item(style="padding:20px")
+          .gal-item-wrapper
+            .figure.gal-item-inner                               
+              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
+
+  .container
+    .row
       .col-xs-12.mtbig.text-center
-        h2 Chúng tôi đem đến cho bạn trải nghiệm mua sắm mỹ phẩm
+      h2 Chúng tôi đem đến cho bạn trải nghiệm mua sắm mỹ phẩm
     .row
       .col-sm-4.text-center.mtbig
         i.pe-7s-leaf.feature-icon
@@ -76,31 +129,62 @@ div
           .product-img(style="background-image: url('http://aresivel.wiloke.com/wp-content/uploads/2015/07/23.jpg');")
           h4 Dau goi kho batiste
           span 39 000
-
   .container
+    .row.mtbig.text-center
+      .col-sm-12
+        img(src="http://vignette2.wikia.nocookie.net/animal-jam-clans-1/images/e/e0/Hipster_arrow_heart_page_divider.png/revision/latest?cb=20160729215711")
     .row
       .col-sm-12
-        .gal-item(style="padding:20px")
-          .gal-item-wrapper
-            .figure.gal-item-inner                                
-              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/1-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/1-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/1-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")         
-        .gal-item(style="padding:20px")
-          .gal-item-wrapper
-            .figure.gal-item-inner                                
-              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
-        .gal-item(style="padding:20px")
-          .gal-item-wrapper
-            .figure.gal-item-inner                                
-              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
-        .gal-item(style="padding:20px")
-          .gal-item-wrapper
-            .figure.gal-item-inner                                
-              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/6-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/6-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/6-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
-        .gal-item(style="padding:20px")
-          .gal-item-wrapper
-            .figure.gal-item-inner                                
-              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/2-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
-        .gal-item(style="padding:20px")
-          .gal-item-wrapper
-            .figure.gal-item-inner                                
-              img(width="600" height="300" src="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png" class="image-fadein attachment-full" alt="" srcset="http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1.png 600w, http://simple-elegant.withemes.com/wp-content/uploads/2016/10/5-1-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px")
+        h2.text-center Mua hang theo phan muc
+    .row
+      .col-sm-4.col-md-4
+        .category-item
+          .background(style="background-image:url('http://leflair-assets.storage.googleapis.com/58609b30038c8b0100f8820c.jpg')")
+            .padding10
+              router-link.frame(to="/makeup")
+                span Make up
+      .col-sm-4
+        .category-item
+          .background(style="background-image:url('https://leflair-assets.storage.googleapis.com/586369789194480100a4c8b4.jpg')")
+            .padding10
+              router-link.frame(to="/makeup")
+                span Make up
+      .col-sm-4
+        .category-item
+          .background(style="background-image:url('https://leflair-assets.storage.googleapis.com/5864f66e3fe9f601005f9cdd.jpg')")
+            .padding10
+              router-link.frame(to="/makeup")
+                span Make up
+      .col-sm-4
+        .category-item
+          .background(style="background-image:url('https://leflair-assets.storage.googleapis.com/5863877f3fe9f601005f73c6.jpg')")
+            .padding10
+              router-link.frame(to="/makeup")
+                span Make up
+      .col-sm-4
+        .category-item
+          .background(style="background-image:url('https://leflair-assets.storage.googleapis.com/585cf9af038c8b0100f85e81.jpg')")
+            .padding10
+              router-link.frame(to="/makeup")
+                span Make up
+      .col-sm-4
+        .category-item
+          .background(style="background-image:url('http://leflair-assets.storage.googleapis.com/5864f7e63fe9f601005f9ce2.jpg')")
+            .padding10
+              router-link.frame(to="/makeup")
+                span Make up
+  .container
+    .col-sm-12.text-center
+      img(src="https://www.masteringemacs.org/static/img/fleuron1.gif")
+  .container
+    .col-sm-12
+      button.dropdown
+        .button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") Drop down
+          span.caret
+        ul.dropdown-menu
+          li
+            a(href="#") Action            
+            a(href="#") Another action
+            a(href="#") Something else here
+
+  PageFooter
