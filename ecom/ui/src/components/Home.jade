@@ -16,30 +16,35 @@ div
           li
             span
               i.flaticon-magnifying-glass
-              .dropdownhover
-                .button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") 
+              dropdownhover(data-hide-timeout="1000").menumore
+                i.dropdown-toggle(type="button", data-toggle="dropdown") 
                   span.flaticon-menu
                 ul.dropdown-menu
                   li
-                    a(href="#") Action 
+                    a(href="#") 
+                      i.lgfb.pe-7s-sun
+                      | Blog
                   li
-                    a(href="#") Another action
+                    a(href="#") 
+                      i.lgfb.flaticon-social
+                      | Ve chung toi
                   li
-                    a(href="#") Something else here
+                    a(href="#") 
+                      i.lgfb.flaticon-social
+                      | Chinh sach
+
+                  li.divider
+                  
+                  li
+                    a(href="#") 
+                      i.lgfb.flaticon-facebook-logo
+                      | Đăng nhập facebook
+                  li
+                    a(href="#") 
+                      i.lgfb.flaticon-google-plus-1(style='color: red')
+                      | &nbsp; Đăng nhập google
 
   .container
-    .row
-      .dropdownhover.dropdown
-        .button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") 
-          span.flaticon-menu
-        ul.dropdown-menu
-          li
-            a(href="#") Action 
-          li
-            a(href="#") Another action
-          li
-            a(href="#") Something else here
-
     .row
       carousel#carousel-example-generic.carousel.slide.col-sm-12(data-ride="carousel")
         ol.carousel-indicators
